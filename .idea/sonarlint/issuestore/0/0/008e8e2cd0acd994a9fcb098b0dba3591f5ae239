@@ -1,0 +1,60 @@
+
+E
+java:S3740"/Provide the parametrized type for this generic.(ÿ“áÂ
+J
+java:S3740"/Provide the parametrized type for this generic.(Ó´øİÿÿÿÿÿ
+D
+java:S3740*"/Provide the parametrized type for this generic.(êšÏ~
+J
+java:S37406"/Provide the parametrized type for this generic.(¦ĞêÇÿÿÿÿÿ
+E
+java:S3740j"/Provide the parametrized type for this generic.(öŒÊ€
+J
+java:S3740s"/Provide the parametrized type for this generic.(ÌüÅÿÿÿÿÿ
+K
+java:S3740ª"/Provide the parametrized type for this generic.(ŒæŒëøÿÿÿÿ
+F
+java:S3740¹"/Provide the parametrized type for this generic.(¨ÚÇ¨
+F
+java:S3740¹"/Provide the parametrized type for this generic.(¨ÚÇ¨
+F
+java:S3740Ã"/Provide the parametrized type for this generic.(…ï¡„
+F
+java:S3740Ã"/Provide the parametrized type for this generic.(…ï¡„
+E
+java:S3740Ñ"/Provide the parametrized type for this generic.(Úéò:
+K
+java:S3740İ"/Provide the parametrized type for this generic.(Ì•ø’şÿÿÿÿ
+_
+java:S1192©"HDefine a constant instead of duplicating this literal " HD: - " 3 times.(’Í«
+Z
+java:S1226="EIntroduce a new variable instead of reusing the parameter "padreAux".(Äµ g
+[
+java:S1226‰"EIntroduce a new variable instead of reusing the parameter "padreAux".(Äµ g
+Y
+java:S2259Ü"BA "NullPointerException" could be thrown; "padr" is nullable here.(§¨ü
+R
+java:S2589v"7Remove this expression which always evaluates to "true"(Æ×±”ÿÿÿÿÿ
+S
+java:S2589¯"7Remove this expression which always evaluates to "true"(Üøİúúÿÿÿÿ
+m
+java:S37766"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(¦ĞêÇÿÿÿÿÿ
+m
+java:S3776s"RRefactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed.(ÌüÅÿÿÿÿÿ
+R	java:S125º"<This block of commented-out lines of code should be removed.(¬ÒÍ
+X
+java:S1659Ò"ADeclare "aux2" and all following declarations on a separate line.(ÎÒ¿
+@
+java:S1481Ò")Remove this unused "aux2" local variable.(ÎÒ¿
+Z
+java:S1659â"CDeclare "altIzq" and all following declarations on a separate line.(­’€ˆ
+i
+java:S3776ï"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(äÎ¶Ñ
+o
+java:S2975ø"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(æ“Úçûÿÿÿÿ
+d
+java:S1182ø"HUse super.clone() to create and seed the cloned instance to be returned.(æ“Úçûÿÿÿÿ
+n
+java:S3776Ÿ"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(Âš×…øÿÿÿÿ
+=
+java:S1659¡"!Declare "der" on a separate line.(»Ú¶ÿÿÿÿÿ
