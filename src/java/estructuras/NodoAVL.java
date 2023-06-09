@@ -1,4 +1,4 @@
-package estructuras;
+package java.estructuras;
 
 public class NodoAVL {
 

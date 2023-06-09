@@ -3,11 +3,13 @@ package java.util;
 /**
  * @author Mateo Valdesolo
  */
-public class EscapeHouse {
+public class FileWriter {
 
-    private final String rutaArchivo = "src\\resources\\log.txt";
+    private final String rutaDatosIniciales = "src\\resources\\datosIniciales.txt";
+    private final String rutaLog = "src\\resources\\log.txt";
 
-    
+
+
 
 
 }
