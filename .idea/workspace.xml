@@ -5,40 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9846a39-6f42-4f01-a7fb-990baa59a3ee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/Mateo_Valdesolo.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/0/008e8e2cd0acd994a9fcb098b0dba3591f5ae239" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/3/13d9c38250376d2f5e3ce515ee22e0e0bcd38326" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/5/b5826321a43573c913a6cd36268cfdcfb64ff38f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/5/d55a381e10b93981c433733cd70a890175236b53" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/7/f762ac3f944a1d4db3b873862368b7e75d02d590" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/0/008e8e2cd0acd994a9fcb098b0dba3591f5ae239" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/3/13d9c38250376d2f5e3ce515ee22e0e0bcd38326" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/2/924f089edb4af5ee45c8a9d1129cd28e2b368138" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/5/b5826321a43573c913a6cd36268cfdcfb64ff38f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/5/d55a381e10b93981c433733cd70a890175236b53" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/7/f762ac3f944a1d4db3b873862368b7e75d02d590" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TpFinalEstructuras.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/EscapeHouse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/estructuras/ArbolAVL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/estructuras/GrafoEtiquetado.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/estructuras/Lista.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/estructuras/Nodo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/estructuras/NodoAVL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/estructuras/NodoAdy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/estructuras/NodoVert.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/model/Desafio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/model/Equipo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/model/Habitacion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/java/util/FileWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resources/datosIniciales.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/TipoDesafio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pruebas/GrafoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/EscapeHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscapeHouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/estructuras/ArbolAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/ArbolAVL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/estructuras/GrafoEtiquetado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/estructuras/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/Lista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/estructuras/Nodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/Nodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/estructuras/NodoAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/NodoAVL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/estructuras/NodoAdy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/NodoAdy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/estructuras/NodoVert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/NodoVert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Desafio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Desafio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Equipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/model/Habitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Habitacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/util/FileWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utiles/FileWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,12 +29,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Qtkfc4ruEPHZriNro0pKENweNU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -81,6 +66,68 @@
       <recent name="D:\Workspace\TpFinalEstructuras\src\estructuras" />
     </key>
   </component>
+  <component name="RunManager" selected="Application.pruebas.GrafoTest">
+    <configuration name="GrafoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java.test.GrafoTest" />
+      <module name="TpFinalEstructuras" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="java.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java.pruebas.GrafoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java.pruebas.GrafoTest" />
+      <module name="TpFinalEstructuras" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pruebas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java.tests.GrafoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java.tests.GrafoTest" />
+      <module name="TpFinalEstructuras" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="java.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="pruebas.GrafoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pruebas.GrafoTest" />
+      <module name="TpFinalEstructuras" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pruebas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.pruebas.GrafoTest" />
+        <item itemvalue="Application.java.pruebas.GrafoTest" />
+        <item itemvalue="Application.java.tests.GrafoTest" />
+        <item itemvalue="Application.GrafoTest" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -92,6 +139,7 @@
       <workItem from="1686180371566" duration="1341000" />
       <workItem from="1686181746870" duration="3552000" />
       <workItem from="1686264449868" duration="8560000" />
+      <workItem from="1686614592383" duration="4160000" />
     </task>
     <servers />
   </component>

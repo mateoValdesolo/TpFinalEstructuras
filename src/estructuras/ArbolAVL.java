@@ -1,4 +1,4 @@
-package java.estructuras;
+package estructuras;
 
 public class ArbolAVL {
 

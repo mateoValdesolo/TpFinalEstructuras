@@ -1,4 +1,4 @@
-package java.model;
+package model;
 
 /**
  * @author Mateo Valdesolo
@@ -7,9 +7,9 @@ public class Desafio {
 
     private Comparable puntaje;
     private String nombre;
-    private String tipo;
+    private TipoDesafio tipo;
 
-    public Desafio(Comparable puntaje, String nombre, String tipo) {
+    public Desafio(Comparable puntaje, String nombre, TipoDesafio tipo) {
         this.puntaje = puntaje;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -27,11 +27,11 @@ public class Desafio {
         this.nombre = nombre;
     }
 
-    public String getTipo() {
+    public TipoDesafio getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoDesafio tipo) {
         this.tipo = tipo;
     }
 

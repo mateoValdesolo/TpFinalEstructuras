@@ -1,4 +1,4 @@
-package java.estructuras;
+package estructuras;
 
 /**
  * @author Mateo Valdesolo
@@ -38,9 +38,27 @@ public class GrafoEtiquetado {
      * @return exito
      */
     public boolean eliminarVertice(Object elem){
+        // NO tomo el caso en el que el elemento sea el inicio
         boolean exito = false;
-
-
+        NodoVert aux = inicio;
+        NodoVert nodoElim = null;
+        NodoAdy ady = null;
+        if(inicio != null){
+            while(aux.getSigVertice() != null && !exito){
+                if(aux.getSigVertice().getElem().equals(elem)){
+                    exito = true;
+                    nodoElim = aux.getSigVertice();
+                    ady = nodoElim.getPrimerAdy();
+                    while(ady != null){
+                        eliminarArco(nodoElim.getElem(), ady.getVertice().getElem());
+                        ady = ady.getSigAdyacente();
+                    }
+                    aux.setSigVertice(nodoElim.getSigVertice());
+                } else {
+                    aux = aux.getSigVertice();
+                }
+            }
+        }
         return exito;
     }
 
@@ -96,11 +114,11 @@ public class GrafoEtiquetado {
      */
     public boolean eliminarArco(Object origen,Object destino){
         boolean exito = false;
-        NodoVert vertInicio = inicio;
         NodoVert nodoOrigen = encontrarVertice(origen);
         NodoVert nodoDestino = encontrarVertice(destino);
-        if(nodoOrigen != null && nodoDestino != null){
-            exito = eliminarNodoAdy(nodoOrigen, nodoDestino) && eliminarNodoAdy(nodoDestino, nodoOrigen);
+        if((nodoOrigen != null && nodoDestino != null)){
+            exito = eliminarNodoAdy(nodoOrigen, nodoDestino);
+            eliminarNodoAdy(nodoDestino, nodoOrigen);
         }
         return exito;
     }
@@ -162,7 +180,7 @@ public class GrafoEtiquetado {
             if(aux.getVertice().getElem().equals(nodoDestino.getElem())){
                 nodoOrigen.setPrimerAdy(nodoOrigen.getPrimerAdy().getSigAdyacente());
             } else {
-                while (aux != null && !exito){
+                while (aux.getSigAdyacente() != null && !exito){
                     if(aux.getSigAdyacente().getVertice().getElem().equals(nodoDestino.getElem())){
                         aux.setSigAdyacente(aux.getSigAdyacente().getSigAdyacente());
                         exito = true;
@@ -175,5 +193,30 @@ public class GrafoEtiquetado {
         return exito;
     }
 
-
+    /**
+     * Con fines de debugging, este metodo genera y devuelve una cadena String que muestra los
+     * vertices almacenados en el grafo y que adyacentes tiene cada uno de ellos.
+     * @return
+     */
+    @Override
+    public String toString(){
+        String cadena = "";
+        NodoVert vert;
+        NodoAdy ady;
+        if (inicio != null) {
+            vert = inicio;
+            while (vert != null) {
+                cadena += vert.getElem() + " -> ";
+                ady = vert.getPrimerAdy();
+                while (ady != null) {
+                    cadena += ady.getVertice().getElem() +"["+ady.getEtiqueta()+ "], ";
+                    ady = ady.getSigAdyacente();
+                }
+                cadena = cadena.substring(0, cadena.length() - 1);
+                cadena += "\n";
+                vert = vert.getSigVertice();
+            }
+        }
+        return cadena;
+    }
 }
