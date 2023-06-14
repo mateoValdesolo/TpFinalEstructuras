@@ -4,6 +4,6 @@ package model;
  * @author Mateo Valdesolo
  */
 public enum TipoDesafio {
-    BUSQUEDA, DESTREZA, LOGICO, MATEMATICO
+    BUSQUEDA, DESTREZA, LOGICO, MATEMATICO, INGENIO, MEMORIA
 
 }

@@ -5,21 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9846a39-6f42-4f01-a7fb-990baa59a3ee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/TipoDesafio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pruebas/GrafoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utiles/Texto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/EscapeHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscapeHouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/estructuras/ArbolAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/ArbolAVL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/estructuras/GrafoEtiquetado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/estructuras/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/Lista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/estructuras/Nodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/Nodo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/estructuras/NodoAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/NodoAVL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/estructuras/NodoAdy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/NodoAdy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/estructuras/NodoVert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/NodoVert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/Desafio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Desafio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/Equipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Equipo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/model/Habitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Habitacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/util/FileWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utiles/FileWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EscapeHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscapeHouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/TipoDesafio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TipoDesafio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pruebas/GrafoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pruebas/GrafoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +57,14 @@
       <recent name="D:\Workspace\TpFinalEstructuras\src\estructuras" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.pruebas.GrafoTest">
+  <component name="RunManager" selected="Application.EscapeHouse">
+    <configuration name="EscapeHouse" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="EscapeHouse" />
+      <module name="TpFinalEstructuras" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GrafoTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="java.test.GrafoTest" />
       <module name="TpFinalEstructuras" />
@@ -121,6 +119,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.EscapeHouse" />
         <item itemvalue="Application.pruebas.GrafoTest" />
         <item itemvalue="Application.java.pruebas.GrafoTest" />
         <item itemvalue="Application.java.tests.GrafoTest" />
@@ -140,10 +139,23 @@
       <workItem from="1686181746870" duration="3552000" />
       <workItem from="1686264449868" duration="8560000" />
       <workItem from="1686614592383" duration="4160000" />
+      <workItem from="1686693194541" duration="1207000" />
+      <workItem from="1686694446163" duration="4549000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

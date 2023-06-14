@@ -7,7 +7,6 @@ public class GrafoEtiquetado {
 
     private NodoVert inicio;
 
-
     /**
      * Crea un grafo vacio
      */
@@ -38,24 +37,35 @@ public class GrafoEtiquetado {
      * @return exito
      */
     public boolean eliminarVertice(Object elem){
-        // NO tomo el caso en el que el elemento sea el inicio
         boolean exito = false;
         NodoVert aux = inicio;
         NodoVert nodoElim = null;
         NodoAdy ady = null;
         if(inicio != null){
-            while(aux.getSigVertice() != null && !exito){
-                if(aux.getSigVertice().getElem().equals(elem)){
-                    exito = true;
-                    nodoElim = aux.getSigVertice();
-                    ady = nodoElim.getPrimerAdy();
-                    while(ady != null){
-                        eliminarArco(nodoElim.getElem(), ady.getVertice().getElem());
-                        ady = ady.getSigAdyacente();
+            if(elem.equals(inicio.getElem())){
+                // Si el vertice a eliminar es el inicio
+                nodoElim = inicio;
+                ady = nodoElim.getPrimerAdy();
+                while(ady != null){
+                    eliminarArco(nodoElim.getElem(), ady.getVertice().getElem());
+                    ady = ady.getSigAdyacente();
+                }
+                inicio = inicio.getSigVertice();
+                exito = true;
+            } else {
+                while(aux.getSigVertice() != null && !exito){
+                    if(aux.getSigVertice().getElem().equals(elem)){
+                        exito = true;
+                        nodoElim = aux.getSigVertice();
+                        ady = nodoElim.getPrimerAdy();
+                        while(ady != null){
+                            eliminarArco(nodoElim.getElem(), ady.getVertice().getElem());
+                            ady = ady.getSigAdyacente();
+                        }
+                        aux.setSigVertice(nodoElim.getSigVertice());
+                    } else {
+                        aux = aux.getSigVertice();
                     }
-                    aux.setSigVertice(nodoElim.getSigVertice());
-                } else {
-                    aux = aux.getSigVertice();
                 }
             }
         }
@@ -94,12 +104,22 @@ public class GrafoEtiquetado {
     public boolean insertarArco(Object origen,Object destino,Object etiqueta){
         boolean exito = false;
         NodoVert vertInicio = inicio;
-        NodoVert nodoOrigen = encontrarVertice(origen);
-        NodoVert nodoDestino = encontrarVertice(destino);
-        if(nodoOrigen != null && nodoDestino != null){
-            nodoOrigen.setPrimerAdy(new NodoAdy(nodoDestino, nodoOrigen.getPrimerAdy(), etiqueta));
-            nodoDestino.setPrimerAdy(new NodoAdy(nodoOrigen, nodoDestino.getPrimerAdy(), etiqueta));
-            exito = true;
+        NodoVert nodoOrigen = null;
+        NodoVert nodoDestino = null;
+        while(vertInicio != null && !exito){
+            if(vertInicio.getElem().equals(origen)){
+                nodoOrigen = vertInicio;
+            } else {
+                if(vertInicio.getElem().equals(destino)){
+                    nodoDestino = vertInicio;
+                }
+            }
+            vertInicio = vertInicio.getSigVertice();
+            if(nodoOrigen != null && nodoDestino != null){
+                nodoOrigen.setPrimerAdy(new NodoAdy(nodoDestino, nodoOrigen.getPrimerAdy(), etiqueta));
+                nodoDestino.setPrimerAdy(new NodoAdy(nodoOrigen, nodoDestino.getPrimerAdy(), etiqueta));
+                exito = true;
+            }
         }
         return exito;
     }
@@ -114,11 +134,22 @@ public class GrafoEtiquetado {
      */
     public boolean eliminarArco(Object origen,Object destino){
         boolean exito = false;
-        NodoVert nodoOrigen = encontrarVertice(origen);
-        NodoVert nodoDestino = encontrarVertice(destino);
-        if((nodoOrigen != null && nodoDestino != null)){
-            exito = eliminarNodoAdy(nodoOrigen, nodoDestino);
-            eliminarNodoAdy(nodoDestino, nodoOrigen);
+        NodoVert vertInicio = inicio;
+        NodoVert nodoOrigen = null;
+        NodoVert nodoDestino = null;
+        while(vertInicio != null && !exito){
+            if(vertInicio.getElem().equals(origen)){
+                nodoOrigen = vertInicio;
+            } else {
+                if(vertInicio.getElem().equals(destino)){
+                    nodoDestino = vertInicio;
+                }
+            }
+            vertInicio = vertInicio.getSigVertice();
+            if(nodoOrigen != null && nodoDestino != null){
+                exito = eliminarNodoAdy(nodoOrigen, nodoDestino);
+                eliminarNodoAdy(nodoDestino, nodoOrigen);
+            }
         }
         return exito;
     }
