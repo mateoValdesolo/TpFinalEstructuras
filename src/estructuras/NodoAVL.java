@@ -2,31 +2,41 @@ package estructuras;
 
 public class NodoAVL {
 
-    private Comparable elem;
+    private Comparable clave;
+    private Object elem;
     private int altura;
     private NodoAVL izquierdo;
     private NodoAVL derecho;
 
-    public NodoAVL(Comparable elem, NodoAVL izq, NodoAVL der) {
+    public NodoAVL(Comparable clave,Object elem, NodoAVL izq, NodoAVL der) {
+        this.clave = clave;
         this.elem = elem;
         this.izquierdo = izq;
         this.derecho = der;
         this.altura = 0;
     }
 
-    public void setElem(Comparable elem) {
-        this.elem = elem;
+    public void setClave(Comparable clave) {
+        this.clave = clave;
     }
 
     public void setIzquierdo(NodoAVL izq) {
         this.izquierdo = izq;
     }
 
+    public void setElem(Object elem) {
+        this.elem = elem;
+    }
+
     public void setDerecho(NodoAVL der) {
         this.derecho = der;
     }
 
-    public Comparable getElem() {
+    public Comparable getClave() {
+        return this.clave;
+    }
+
+    public Object getElem() {
         return this.elem;
     }
 

@@ -154,7 +154,7 @@ public class Lista {
         if (!esVacia()) {
             s = "[";
             while (aux != null) {
-                s += aux.getElem();
+                s += aux.getElem().toString();
                 aux = aux.getEnlace();
                 if (aux != null) {
                     s += ", ";

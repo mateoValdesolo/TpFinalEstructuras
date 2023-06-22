@@ -1,7 +1,12 @@
 package pruebas;
 
+import estructuras.ArbolAVL;
 import estructuras.GrafoEtiquetado;
+import estructuras.Lista;
+import model.Equipo;
 import utiles.Texto;
+
+import java.util.HashMap;
 
 /**
  * @author Mateo Valdesolo
@@ -28,7 +33,17 @@ public class GrafoTest {
         grafo.eliminarArco("E","D");
         System.out.println(grafo.toString());*/
 
+        ArbolAVL desafios = new ArbolAVL();
+        ArbolAVL habitaciones = new ArbolAVL();
+        GrafoEtiquetado grafoCasa = new GrafoEtiquetado();
+        HashMap<String, Equipo> equipos = new HashMap<>();
+        HashMap<String, Lista> desafiosPorEquipo = new HashMap<>();
         Texto.menuPrincipal();
+        Texto.abm();
+        Texto.consultaHabitaciones();
+        Texto.consultaDesafios();
+        Texto.consultaEquipos();
+        Texto.consultasGenerales(grafoCasa,desafios,equipos);
 
     }
 }
