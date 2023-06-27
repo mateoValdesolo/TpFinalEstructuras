@@ -1,5 +1,7 @@
 package estructuras;
 
+import model.Desafio;
+
 public class ArbolAVL {
 
     private NodoAVL raiz;
@@ -39,19 +41,19 @@ public class ArbolAVL {
         return exito;
     }
 
-    public boolean insertar(Comparable clave,Object elem) {
+    public boolean insertar(Comparable clave, Object elem) {
         boolean exito = false;
         if (esVacio()) {
-            this.raiz = new NodoAVL(clave,elem ,null, null);
+            this.raiz = new NodoAVL(clave, elem, null, null);
             exito = true;
         } else {
-            exito = insertarAux(this.raiz, clave,elem, null, null);
+            exito = insertarAux(this.raiz, clave, elem, null, null);
             this.raiz.recalcularAltura();
         }
         return exito;
     }
 
-    private boolean insertarAux(NodoAVL nodo, Comparable clave,Object elem, NodoAVL padre, NodoAVL padreAux) {
+    private boolean insertarAux(NodoAVL nodo, Comparable clave, Object elem, NodoAVL padre, NodoAVL padreAux) {
         boolean exito = true;
         int compar = clave.compareTo(nodo.getClave());
         if (compar == 0) {
@@ -64,7 +66,7 @@ public class ArbolAVL {
                 // Elem es menor a nodo.getElem().
                 // Si tiene HI baja a la izquierda, sino agrega elem.
                 if (nodo.getIzquierdo() != null) {
-                    exito = insertarAux(nodo.getIzquierdo(), clave,elem, padre, padreAux);
+                    exito = insertarAux(nodo.getIzquierdo(), clave, elem, padre, padreAux);
                     nodo.recalcularAltura();
                     if (Math.abs(balance(nodo)) > 1) {
                         NodoAVL aux = balancear(balance(nodo), nodo);
@@ -76,14 +78,14 @@ public class ArbolAVL {
                         }
                     }
                 } else {
-                    nodo.setIzquierdo(new NodoAVL(clave,elem, null, null));
+                    nodo.setIzquierdo(new NodoAVL(clave, elem, null, null));
                     nodo.recalcularAltura();
                 }
             } else {
                 // Elemento mayor que nodo.getElem().
                 // Si tiene HD baja a la derecha, sino agrega elem.
                 if (nodo.getDerecho() != null) {
-                    exito = insertarAux(nodo.getDerecho(), clave,elem, padre, padreAux);
+                    exito = insertarAux(nodo.getDerecho(), clave, elem, padre, padreAux);
                     nodo.recalcularAltura();
                     if (Math.abs(balance(nodo)) > 1) {
                         NodoAVL aux = balancear(balance(nodo), nodo);
@@ -95,7 +97,7 @@ public class ArbolAVL {
                         }
                     }
                 } else {
-                    nodo.setDerecho(new NodoAVL(clave,elem, null, null));
+                    nodo.setDerecho(new NodoAVL(clave, elem, null, null));
                     nodo.recalcularAltura();
                 }
             }
@@ -106,7 +108,7 @@ public class ArbolAVL {
     public boolean eliminar(Comparable clave) {
         boolean ret = false;
         if (pertenece(clave)) {
-            ret = eliminarAux(this.raiz, clave, null,null);
+            ret = eliminarAux(this.raiz, clave, null, null);
             this.raiz.recalcularAltura();
         }
         return ret;
@@ -161,7 +163,7 @@ public class ArbolAVL {
                         }
                     }
                 }
-                
+
             }
         }
         return ret;
@@ -380,7 +382,7 @@ public class ArbolAVL {
          */
         ArbolAVL clon = new ArbolAVL();
         if (!esVacio()) {
-            NodoAVL nod = new NodoAVL(this.raiz.getClave(),this.raiz.getElem(), null, null);
+            NodoAVL nod = new NodoAVL(this.raiz.getClave(), this.raiz.getElem(), null, null);
             clon.raiz = nod;
             cloneAux(nod, this.raiz);
         }
@@ -390,11 +392,11 @@ public class ArbolAVL {
     private void cloneAux(NodoAVL aux, NodoAVL nodo) {
         if (nodo != null) {
             if (nodo.getIzquierdo() != null) {
-                aux.setIzquierdo(new NodoAVL(nodo.getIzquierdo().getClave(),nodo.getIzquierdo().getElem(), null, null));
+                aux.setIzquierdo(new NodoAVL(nodo.getIzquierdo().getClave(), nodo.getIzquierdo().getElem(), null, null));
                 cloneAux(aux.getIzquierdo(), nodo.getIzquierdo());
             }
             if (nodo.getDerecho() != null) {
-                aux.setDerecho(new NodoAVL(nodo.getDerecho().getClave(),nodo.getDerecho().getElem(), null, null));
+                aux.setDerecho(new NodoAVL(nodo.getDerecho().getClave(), nodo.getDerecho().getElem(), null, null));
                 cloneAux(aux.getDerecho(), nodo.getDerecho());
             }
         }
@@ -441,23 +443,23 @@ public class ArbolAVL {
         return str;
     }
 
-    public Comparable encontrarElemento(Comparable elem) {
+    public Object encontrarElemento(Comparable clave) {
         /*
          * Devuelve el elemento recibido por parámetro si está en el árbol y
          * null en caso contrario.
          */
-        Comparable ret = null;
+        Object ret = null;
         if (!esVacio()) {
-            ret = encontrarElementoAux(this.raiz, elem);
+            ret = encontrarElementoAux(this.raiz, clave);
         }
         return ret;
     }
 
-    private Comparable encontrarElementoAux(NodoAVL nodo, Comparable clave) {
-        Comparable ret = null;
+    private Object encontrarElementoAux(NodoAVL nodo, Comparable clave) {
+        Object ret = null;
         int res = nodo.getClave().compareTo(clave);
         if (res == 0) {
-            ret = nodo.getClave();
+            ret = nodo.getElem();
         } else {
             if (res < 0) {
                 if (nodo.getDerecho() != null) {
@@ -472,5 +474,27 @@ public class ArbolAVL {
         return ret;
     }
 
+    public Lista mostrarDesafiosTipo(Comparable min, Comparable max, Comparable tipo) {
+        Lista ret = new Lista();
+        mostrarDesafiosTipoAux(this.raiz, min, max, tipo, ret);
+        return ret;
+    }
+
+    private void mostrarDesafiosTipoAux(NodoAVL nodo, Comparable min, Comparable max, Comparable tipo, Lista lis) {
+        if (nodo != null) {
+            if (nodo.getClave().compareTo(min) > 0) {
+                mostrarDesafiosTipoAux(nodo.getIzquierdo(), min, max, tipo, lis);
+            }
+            if (nodo.getClave().compareTo(min) >= 0 && nodo.getClave().compareTo(max) <= 0) {
+                Desafio des = (Desafio) nodo.getElem();
+                if (des.getTipo().equals(tipo)) {
+                    lis.insertar(nodo.getElem(), lis.longitud() + 1);
+                }
+            }
+            if (nodo.getClave().compareTo(max) < 0) {
+                mostrarDesafiosTipoAux(nodo.getDerecho(), min, max, tipo, lis);
+            }
+        }
+    }
 
 }

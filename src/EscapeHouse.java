@@ -4,9 +4,11 @@ import estructuras.Lista;
 import model.Desafio;
 import model.Equipo;
 import model.Habitacion;
+import model.TipoDesafio;
 import utiles.Texto;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -59,7 +61,6 @@ public class EscapeHouse {
                     break;
             }
         }
-
         sc.close();
     }
 
@@ -164,10 +165,11 @@ public class EscapeHouse {
                     break;
                 case '2':
                     // Verificar Desafio Resuelto
-                    verificarDesafioResuelto(sc, desafiosPorEquipo); // TODO: Terminar verificarDesafioResuelto, ver como obtengo el desafio solamente con el nombre
+                    verificarDesafioResuelto(sc, desafiosPorEquipo, equipos, desafios);
                     break;
                 case '3':
                     // Mostrar Desafios Tipo
+                    mostrarDesafiosTipo(sc, desafios);
                     break;
                 case '4':
                     // Volver al menu principal
@@ -177,7 +179,6 @@ public class EscapeHouse {
                     break;
             }
         }
-
     }
 
     /**
@@ -218,14 +219,71 @@ public class EscapeHouse {
      * @param sc                Scanner
      * @param desafiosPorEquipo HashMap de desafios por equipo
      */
-    public static void verificarDesafioResuelto(Scanner sc, HashMap<String, Lista> desafiosPorEquipo) {
+    public static void verificarDesafioResuelto(Scanner sc, HashMap<String, Lista> desafiosPorEquipo, HashMap<String, Equipo> equipos, ArbolAVL desafios) {
+        System.out.println("Ingrese el nombre del equipo: ");
         String nombreEquipo = sc.nextLine();
+        System.out.println("Ingrese el nombre del desafio: ");
         String nombreDesafio = sc.nextLine();
-        Lista desafios = desafiosPorEquipo.get(nombreEquipo);
-        if (desafios != null) {
-            Desafio desafio;
+
+        if (equipos.containsKey(nombreEquipo)) {
+            Lista desafiosHechos = desafiosPorEquipo.get(nombreEquipo);
+            if (desafiosHechos != null) {
+                if (desafiosHechos.desafioResuelto(nombreDesafio)) {
+                    Texto.desafioResuelto();
+                } else {
+                    Texto.desafioNoResuelto();
+                }
+            }
         } else {
             Texto.equipoInexistente();
+        }
+    }
+
+
+    /**
+     * Dados dos puntajes a y b y un tipo X, muestra todos los desafios de tipo X con puntaje en el rango [a, b].
+     *
+     * @param sc
+     * @param desafios
+     */
+    public static void mostrarDesafiosTipo(Scanner sc, ArbolAVL desafios) {
+        TipoDesafio tipoDesafio = null;
+
+        System.out.println("Ingrese puntaje minimo: ");
+        double puntajeMin = sc.nextDouble();
+        System.out.println("Ingrese puntaje maximo: ");
+        double puntajeMax = sc.nextDouble();
+        Texto.tipoDesafios();
+        char tipo = sc.nextLine().charAt(0);
+
+        switch (tipo) {
+            case 'B':
+                tipoDesafio = TipoDesafio.BUSQUEDA;
+                break;
+            case 'D':
+                tipoDesafio = TipoDesafio.DESTREZA;
+                break;
+            case 'L':
+                tipoDesafio = TipoDesafio.LOGICO;
+                break;
+            case 'M':
+                tipoDesafio = TipoDesafio.MATEMATICO;
+                break;
+            case 'I':
+                tipoDesafio = TipoDesafio.INGENIO;
+                break;
+            case 'E':
+                tipoDesafio = TipoDesafio.MEMORIA;
+                break;
+            default:
+                Texto.desafioInexistente();
+                break;
+        }
+
+        Lista lista = desafios.mostrarDesafiosTipo(puntajeMin, puntajeMax, tipoDesafio);
+
+        for (int i = 1; i <= lista.longitud(); i++) {
+            System.out.println(lista.recuperar(i));
         }
     }
 
@@ -245,7 +303,7 @@ public class EscapeHouse {
             switch (opcion) {
                 case '0':
                     // Mostrar Equipo
-                    mostrarEquipo(sc, equipos);
+                    mostrarInfoEquipo(sc, equipos);
                     break;
                 case '1':
                     // Mostrar Equipos Ordenados
@@ -272,7 +330,7 @@ public class EscapeHouse {
      * @param sc      Scanner
      * @param equipos HashMap de equipos
      */
-    public static void mostrarEquipo(Scanner sc, HashMap<String, Equipo> equipos) {
+    public static void mostrarInfoEquipo(Scanner sc, HashMap<String, Equipo> equipos) {
         String nombreEquipo = sc.nextLine();
         Equipo equipo = equipos.get(nombreEquipo);
         if (equipo != null) {

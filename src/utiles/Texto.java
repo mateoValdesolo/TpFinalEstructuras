@@ -23,7 +23,7 @@ public class Texto {
         separador();
     }
 
-    public static void consultasGenerales(GrafoEtiquetado grafoCasa, ArbolAVL desafios , HashMap<String, Equipo> equipos) {
+    public static void consultasGenerales(GrafoEtiquetado grafoCasa, ArbolAVL desafios, HashMap<String, Equipo> equipos) {
         encabezado("Consultas Generales");
         mostrarHabitaciones(grafoCasa);
         mostrarDesafios(desafios);
@@ -90,6 +90,23 @@ public class Texto {
         System.out.println(desafios.toString());
     }
 
+    public static void tipoDesafios() {
+        System.out.println("B. BUSQUEDA\n" +
+                "D. DESTREZA\n" +
+                "L. LOGICO\n" +
+                "M. MATEMATICO\n" +
+                "I. INGENIO\n" +
+                "E. MEMORIA\n");
+    }
+
+    public static void desafioResuelto() {
+        System.out.println("El desafio ya fue resuelto");
+    }
+
+    public static void desafioNoResuelto() {
+        System.out.println("El desafio no fue resuelto");
+    }
+
     // ********** EQUIPOS **********
 
     public static void consultaEquipos() {
@@ -108,8 +125,10 @@ public class Texto {
     }
 
     private static void mostrarEquipos(HashMap<String, Equipo> equipos) {
-        // TODO: Ver como mostrar los equipos correctamente, ya que muestra el objeto y no el nombre
+        // No muestro la clave ya que es el nombre del grupo, y este esta incluido en el objeto.
         System.out.println(equipos.toString());
+        equipos.forEach((clave, equipo) ->
+                System.out.println(equipo.toString()));
     }
 
     // ********** VARIOS **********
@@ -120,7 +139,7 @@ public class Texto {
                 "====================================");
     }
 
-    private static void separador(){
+    private static void separador() {
         System.out.println("====================================\n");
     }
 
