@@ -474,27 +474,4 @@ public class ArbolAVL {
         return ret;
     }
 
-    public Lista mostrarDesafiosTipo(Comparable min, Comparable max, Comparable tipo) {
-        Lista ret = new Lista();
-        mostrarDesafiosTipoAux(this.raiz, min, max, tipo, ret);
-        return ret;
-    }
-
-    private void mostrarDesafiosTipoAux(NodoAVL nodo, Comparable min, Comparable max, Comparable tipo, Lista lis) {
-        if (nodo != null) {
-            if (nodo.getClave().compareTo(min) > 0) {
-                mostrarDesafiosTipoAux(nodo.getIzquierdo(), min, max, tipo, lis);
-            }
-            if (nodo.getClave().compareTo(min) >= 0 && nodo.getClave().compareTo(max) <= 0) {
-                Desafio des = (Desafio) nodo.getElem();
-                if (des.getTipo().equals(tipo)) {
-                    lis.insertar(nodo.getElem(), lis.longitud() + 1);
-                }
-            }
-            if (nodo.getClave().compareTo(max) < 0) {
-                mostrarDesafiosTipoAux(nodo.getDerecho(), min, max, tipo, lis);
-            }
-        }
-    }
-
 }

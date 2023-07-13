@@ -263,19 +263,4 @@ public class Lista {
             }
         }
     }
-
-    public boolean desafioResuelto(String nombreDesafio){
-        boolean resuelto = false;
-        Nodo aux = this.cabecera;
-        if (!esVacia()) {
-            while (aux != null && !resuelto) {
-                Desafio desafio = (Desafio) aux.getElem();
-                if (desafio.getNombre().equals(nombreDesafio)) {
-                    resuelto = true;
-                }
-                aux = aux.getEnlace();
-            }
-        }
-        return resuelto;
-    }
 }

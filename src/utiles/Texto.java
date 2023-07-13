@@ -36,8 +36,11 @@ public class Texto {
     public static void abm() {
         encabezado("ABM");
         System.out.println("0. Alta de Habitacion\n" +
+                "a. Alta de Puerta\n" +
                 "1. Baja de Habitacion\n" +
+                "b. Baja de Puerta\n" +
                 "2. Modificacion de Habitacion\n" +
+                "c. Modificacion de Puerta\n" +
                 "3. Alta de Desafio\n" +
                 "4. Baja de Desafio\n" +
                 "5. Modificacion de Desafio\n" +
@@ -68,6 +71,10 @@ public class Texto {
 
     private static void mostrarHabitaciones(GrafoEtiquetado grafoCasa) {
         System.out.println(grafoCasa.toString());
+    }
+
+    public static void habitacionNoContigua(int codigo){
+        System.out.println("La habitacion " + codigo + " no es contigua a la habitacion actual");
     }
 
     // ********** DESAFIOS **********
@@ -107,6 +114,10 @@ public class Texto {
         System.out.println("El desafio no fue resuelto");
     }
 
+    public static void desafioResueltoPorEquipo(String nombreDesafio, String nombreEquipo) {
+        System.out.println("El desafio " + nombreDesafio + " fue resuelto por el equipo " + nombreEquipo);
+    }
+
     // ********** EQUIPOS **********
 
     public static void consultaEquipos() {
@@ -131,6 +142,14 @@ public class Texto {
                 System.out.println(equipo.toString()));
     }
 
+    public static void puedeSalir(String nombreEquipo){
+        System.out.println("El equipo " + nombreEquipo + " puede salir");
+    }
+
+    public static void noPuedeSalir(String nombreEquipo){
+        System.out.println("El equipo " + nombreEquipo + " no puede salir");
+    }
+
     // ********** VARIOS **********
 
     private static void encabezado(String titulo) {
@@ -145,6 +164,14 @@ public class Texto {
 
     public static void opcionInvalida() {
         System.out.println("Opcion invalida, intente nuevamente");
+    }
+
+    public static void puntajeInsuficiente(int codigoHabitacion){
+        System.out.println("El puntaje del equipo es insuficiente para pasar a la habitacion "+codigoHabitacion+".");
+    }
+
+    public static void siguienteHabitacion(String nombre, int codigoHabitacion){
+        System.out.println("El equipo "+nombre+" paso a la habitacion "+codigoHabitacion+".");
     }
 
 }

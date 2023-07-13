@@ -1,0 +1,46 @@
+H;1;Recibidor;0;1;true
+H;2;Pasillo;0;2;false
+H;3;Sala de Estar;0;6;false
+H;4;Comedor;0;6;false
+H;5;Cocina;0;5;false
+H;6;Quincho;0;10;false
+H;7;Escalera;0;3;false
+H;8;Biblioteca;0;8;false
+H;9;Dormitorio Principal;1;6;false
+H;10;Dormitorio de Huespedes;1;4;false
+H;11;Baño;1;2;false
+H;12;Despensa;0;3;false
+H;13;Deposito;-1;5;false
+H;14;Escritorio;0;4;false
+H;15;Sala de Musica;0;6;false
+H;16;Sotano;-1;5;false
+H;17;Lavadero;1;3;false
+H;18;Altillo;1;2;false
+H;19;Sala de Juegos;1;4;false
+H;20;Cochera;0;4;true
+P;1;2;5
+P;2;3;10
+P;2;4;15
+P;2;7;20
+P;3;8;45
+P;3;14;30
+P;3;15;14
+P;4;5;17
+P;5;6;24
+P;5;12;12
+P;6;12;20
+P;6;20;30
+P;7;9;17
+P;7;10;30
+P;7;11;55
+P;7;18;13
+P;7;19;20
+P;8;14;34
+P;8;16;10
+P;9;11;15
+P;9;19;3
+P;10;11;19
+P;11;17;32
+P;12;13;40
+P;13;16;50
+P;14;15;25

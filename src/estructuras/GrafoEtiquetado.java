@@ -250,4 +250,51 @@ public class GrafoEtiquetado {
         }
         return cadena;
     }
+
+    /**
+     * Dado un elemento, devuelve una lista con los vertices adyacentes a el y su etiqueta.
+     * @param clave  Comparable
+     * @return ret
+     */
+    public String nodosContiguos(Comparable clave){
+        String ret = "";
+        NodoVert aux = encontrarVertice(clave);
+        if(aux != null){
+            NodoAdy nodoAdy = aux.getPrimerAdy();
+            while(nodoAdy != null){
+                ret += nodoAdy.getVertice().getElem() + " [" + nodoAdy.getEtiqueta() + "]\n";
+                nodoAdy = nodoAdy.getSigAdyacente();
+            }
+        } else {
+            ret = "El vertice no existe";
+        }
+        return ret;
+    }
+
+    /**
+     * Dados dos elementos, devuelve la etiqueta del arco que los une.
+     * @param elem
+     * @param elem2
+     * @return
+     */
+    public Object obtenerEtiqueta(Comparable elem,Comparable elem2){
+        Object ret = null;
+        NodoVert aux = encontrarVertice(elem);
+        boolean exito = false;
+        NodoAdy nodoAdy;
+
+        if(aux != null){
+            nodoAdy = aux.getPrimerAdy();
+            while(nodoAdy != null && !exito){
+                if(nodoAdy.getVertice().getElem().equals(elem2)){
+                    exito = true;
+                    ret = nodoAdy.getEtiqueta();
+                } else {
+                    nodoAdy = nodoAdy.getSigAdyacente();
+                }
+            }
+        }
+        return ret;
+    }
+
 }

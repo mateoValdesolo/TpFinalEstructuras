@@ -6,6 +6,7 @@ import estructuras.Lista;
 import model.Desafio;
 import model.Equipo;
 import model.TipoDesafio;
+import utiles.FileManager;
 import utiles.Texto;
 
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class GrafoTest {
 //        Texto.consultaEquipos();
 //        Texto.consultasGenerales(grafoCasa,desafios,equipos);
 
-        ArbolAVL desafios = new ArbolAVL();
+/*        ArbolAVL desafios = new ArbolAVL();
         Desafio d1 = new Desafio(1, "Desafio 1", TipoDesafio.BUSQUEDA);
         Desafio d2 = new Desafio(3, "Desafio 2", TipoDesafio.DESTREZA);
         Desafio d3 = new Desafio(15, "Desafio 3", TipoDesafio.INGENIO);
@@ -68,10 +69,17 @@ public class GrafoTest {
         System.out.println(lista.longitud());
         for (int i = 1; i <= lista.longitud(); i++) {
             System.out.println(lista.recuperar(i));
-        }
+        }*/
 
-
-
+        FileManager.logAltaDesafio(1);
+        FileManager.logModificacionDesafio(1);
+        FileManager.logBajaDesafio(1);
+        FileManager.logAltaEquipo("Equipo 1");
+        FileManager.logModificacionEquipo("Equipo 1");
+        FileManager.logBajaEquipo("Equipo 1");
+        FileManager.logAltaHabitacion(3);
+        FileManager.logModificacionHabitacion(3);
+        FileManager.logBajaHabitacion(3);
 
     }
 }

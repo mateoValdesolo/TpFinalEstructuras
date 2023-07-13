@@ -5,10 +5,10 @@ import model.Desafio;
 import model.Equipo;
 import model.Habitacion;
 import model.TipoDesafio;
+import utiles.FileManager;
 import utiles.Texto;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -24,7 +24,7 @@ public class EscapeHouse {
         ArbolAVL habitaciones = new ArbolAVL();
         GrafoEtiquetado grafoCasa = new GrafoEtiquetado();
         HashMap<String, Equipo> equipos = new HashMap<>();
-        HashMap<String, Lista> desafiosPorEquipo = new HashMap<>();
+        HashMap<String, Lista> desafiosPorEquipo = new HashMap<>(); //TODO: Ver si esta bien el 1 a muchos.
 
         while (opcion != '6') {
             Texto.menuPrincipal();
@@ -36,6 +36,7 @@ public class EscapeHouse {
                 case '1':
                     // ABM de Habitaciones, Desafios y Equipos
                     Texto.abm();
+                    abm(sc, grafoCasa, habitaciones, desafios, equipos, desafiosPorEquipo);
                     break;
                 case '2':
                     // Consulta sobre Habitaciones
@@ -47,7 +48,7 @@ public class EscapeHouse {
                     break;
                 case '4':
                     // Consulta sobre Equipos
-                    consultaEquipos(sc, equipos);
+                    consultaEquipos(sc, equipos, desafiosPorEquipo, desafios,habitaciones, grafoCasa);
                     break;
                 case '5':
                     // Consultas Generales
@@ -63,6 +64,402 @@ public class EscapeHouse {
         }
         sc.close();
     }
+
+    // ****************************** ABM ******************************
+
+    /**
+     * Menu de ABM
+     *
+     * @param sc                Scanner
+     * @param grafoCasa         Grafo de Habitaciones
+     * @param habitaciones      Arbol de Habitaciones
+     * @param desafios          Arbol de Desafios
+     * @param equipos           HashMap de Equipos
+     * @param desafiosPorEquipo HashMap de Desafios por Equipo
+     */
+    public static void abm(Scanner sc, GrafoEtiquetado grafoCasa, ArbolAVL habitaciones, ArbolAVL desafios, HashMap<String, Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo) {
+        System.out.println("Ingrese una opcion: "); // TODO: Ver si la modificacion funciona, agregar Texto en las altas, bajas y modificaciones.
+        char opcion = sc.nextLine().charAt(0);
+
+        switch (opcion) {
+            case '0':
+                // Alta de Habitacion
+                altaHabitacion(sc, habitaciones, grafoCasa);
+                break;
+            case 'a':
+                // Alta de Puerta
+                altaPuerta(sc, grafoCasa);
+                break;
+            case '1':
+                // Baja de Habitacion
+                bajaHabitacion(sc, habitaciones, grafoCasa);
+                break;
+            case 'b':
+                // Baja de Puerta
+                bajaPuerta(sc, grafoCasa);
+                break;
+            case '2':
+                // Modificacion de Habitacion
+                modificacionHabitacion(sc, habitaciones, grafoCasa);
+                break;
+            case 'c':
+                // Modificacion de Puerta
+                modificacionPuerta(sc, grafoCasa);
+                break;
+            case '3':
+                // Alta de Desafio
+                altaDesafio(sc, desafios);
+                break;
+            case '4':
+                // Baja de Desafio
+                bajaDesafio(sc, desafios);
+                break;
+            case '5':
+                // Modificacion de Desafio
+                modificacionDesafio(sc, desafios);
+                break;
+            case '6':
+                // Alta de Equipo
+                altaEquipo(sc, equipos);
+                break;
+            case '7':
+                // Baja de Equipo
+                bajaEquipo(sc, equipos);
+                break;
+            case '8':
+                // Modificacion de Equipo
+                modificacionEquipo(sc, equipos);
+                break;
+            case '9':
+                // Volver al menu principal
+                break;
+        }
+    }
+
+    // ****************************** ABM HABITACIONES ******************************
+
+    /**
+     * Alta de Habitacion
+     *
+     * @param sc           Scanner
+     * @param habitaciones Arbol de Habitaciones
+     * @param grafoCasa    Grafo de Habitaciones
+     */
+    public static void altaHabitacion(Scanner sc, ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
+        int nroHabitacion;
+        boolean pertenece = false;
+        do {
+            System.out.println("Ingrese el numero de habitacion: ");
+            nroHabitacion = sc.nextInt();
+            pertenece = habitaciones.pertenece(nroHabitacion);
+            if (pertenece) {
+                System.out.println("El numero de habitacion ya existe, ingrese otro numero");
+            }
+        } while (pertenece);
+
+        System.out.println("Ingrese el nombre de la habitacion: ");
+        String nombreHabitacion = sc.nextLine();
+
+        System.out.println("Ingrese la planta de la habitacion: ");
+        int planta = sc.nextInt();
+
+        System.out.println("Ingrese los metros cuadrados de la habitacion: ");
+        double metrosCuadrados = sc.nextDouble();
+
+        System.out.println("Ingrese si la habitacion tiene salida al exterior ('S' para SI, 'N' Para NO): ");
+        boolean salidaAlExterior = sc.nextLine().charAt(0) == 'S';
+
+        Habitacion habitacion = new Habitacion(nroHabitacion, nombreHabitacion, planta, metrosCuadrados, salidaAlExterior);
+
+        habitaciones.insertar(nroHabitacion, habitacion);
+        grafoCasa.insertarVertice(nroHabitacion);
+        FileManager.logAltaHabitacion(nroHabitacion);
+    }
+
+    /**
+     * Baja de Habitacion
+     *
+     * @param sc           Scanner
+     * @param habitaciones Arbol de Habitaciones
+     * @param grafoCasa    Grafo de Habitaciones
+     */
+    public static void bajaHabitacion(Scanner sc, ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
+        System.out.println("Ingrese el numero de habitacion: ");
+        int nroHabitacion = sc.nextInt();
+
+        if (habitaciones.pertenece(nroHabitacion)) {
+            habitaciones.eliminar(nroHabitacion);
+            grafoCasa.eliminarVertice(nroHabitacion);
+            System.out.println("La habitacion " + nroHabitacion + " se elimino correctamente");
+            FileManager.logBajaHabitacion(nroHabitacion);
+        } else {
+            System.out.println("El numero de habitacion no existe");
+        }
+    }
+
+    /**
+     * Modificacion de Habitacion
+     *
+     * @param sc           Scanner
+     * @param habitaciones Arbol de Habitaciones
+     * @param grafoCasa    Grafo de Habitaciones
+     */
+    public static void modificacionHabitacion(Scanner sc, ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
+        System.out.println("Ingrese el numero de habitacion: ");
+        int nroHabitacion = sc.nextInt();
+
+        if (habitaciones.pertenece(nroHabitacion)) {
+            System.out.println("Ingrese el nuevo nombre de la habitacion: ");
+            String nombreHabitacion = sc.nextLine();
+
+            System.out.println("Ingrese la nueva planta de la habitacion: ");
+            int planta = sc.nextInt();
+
+            System.out.println("Ingrese los nuevos metros cuadrados de la habitacion: ");
+            double metrosCuadrados = sc.nextDouble();
+
+            System.out.println("Ingrese si la habitacion tiene salida al exterior ('S' para SI, 'N' Para NO): ");
+            boolean salidaAlExterior = sc.nextLine().charAt(0) == 'S';
+
+            Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(nroHabitacion);
+            habitacion.setNombre(nombreHabitacion);
+            habitacion.setPlanta(planta);
+            habitacion.setMetrosCuadrados(metrosCuadrados);
+            habitacion.setSalidaExterior(salidaAlExterior);
+
+            System.out.println("La habitacion " + nroHabitacion + " se modifico correctamente");
+            FileManager.logModificacionHabitacion(nroHabitacion);
+        } else {
+            System.out.println("La habitacion " + nroHabitacion + " no existe");
+        }
+    }
+
+    // ****************************** ABM PUERTAS ******************************
+
+    /**
+     * Alta de Puerta
+     *
+     * @param sc        Scanner
+     * @param grafoCasa Grafo de Habitaciones
+     */
+    public static void altaPuerta(Scanner sc, GrafoEtiquetado grafoCasa) {
+        System.out.println("Ingrese el numero de habitacion 1: ");
+        int nroHabitacion1 = sc.nextInt();
+
+        System.out.println("Ingrese el numero de habitacion 2: ");
+        int nroHabitacion2 = sc.nextInt();
+
+        System.out.println("Ingrese los puntos necesarios para abrir la puerta: ");
+        int puntaje = sc.nextInt();
+
+        grafoCasa.insertarArco(nroHabitacion1, nroHabitacion2, puntaje);
+    }
+
+    /**
+     * Baja de Puerta
+     *
+     * @param sc        Scanner
+     * @param grafoCasa Grafo de Habitaciones
+     */
+    public static void bajaPuerta(Scanner sc, GrafoEtiquetado grafoCasa) {
+        System.out.println("Ingrese el numero de habitacion 1: ");
+        int nroHabitacion1 = sc.nextInt();
+
+        System.out.println("Ingrese el numero de habitacion 2: ");
+        int nroHabitacion2 = sc.nextInt();
+
+        grafoCasa.eliminarArco(nroHabitacion1, nroHabitacion2);
+    }
+
+    /**
+     * Modificacion de Puerta
+     *
+     * @param sc        Scanner
+     * @param grafoCasa Grafo de Habitaciones
+     */
+    public static void modificacionPuerta(Scanner sc, GrafoEtiquetado grafoCasa) {
+        // TODO: Ver si es necesario este metodo
+        System.out.println("Ingrese el numero de habitacion 1: ");
+        int nroHabitacion1 = sc.nextInt();
+
+        System.out.println("Ingrese el numero de habitacion 2: ");
+        int nroHabitacion2 = sc.nextInt();
+
+        System.out.println("Ingrese los nuevos puntos necesarios para abrir la puerta: ");
+        int puntaje = sc.nextInt();
+
+        grafoCasa.eliminarArco(nroHabitacion1, nroHabitacion2);
+        grafoCasa.insertarArco(nroHabitacion1, nroHabitacion2, puntaje);
+    }
+
+    // ****************************** ABM DESAFIOS ******************************
+
+    /**
+     * Alta de Desafio
+     *
+     * @param sc       Scanner
+     * @param desafios Arbol de Desafios
+     */
+    public static void altaDesafio(Scanner sc, ArbolAVL desafios) {
+        boolean pertenece = false;
+        int puntaje;
+        do {
+            System.out.println("Ingrese el puntaje del desafio: ");
+            puntaje = sc.nextInt();
+            pertenece = desafios.pertenece(puntaje);
+            if (pertenece) {
+                System.out.println("El desafio ya existe");
+            }
+        } while (pertenece);
+
+        System.out.println("Ingrese el nombre del desafio: ");
+        String nombreDesafio = sc.nextLine();
+
+        System.out.println("Ingrese el tipo del desafio: ");
+        Texto.tipoDesafios();
+        char tipo = sc.nextLine().charAt(0);
+        TipoDesafio tipoDesafio = tipoDesafio(tipo);
+
+        Desafio desafio = new Desafio(puntaje, nombreDesafio, tipoDesafio);
+        desafios.insertar(puntaje, desafio);
+        FileManager.logAltaDesafio(puntaje);
+    }
+
+    /**
+     * Baja de Desafio
+     *
+     * @param sc       Scanner
+     * @param desafios Arbol de Desafios
+     */
+    public static void bajaDesafio(Scanner sc, ArbolAVL desafios) {
+        System.out.println("Ingrese el puntaje del desafio: ");
+        int puntaje = sc.nextInt();
+
+        if (desafios.pertenece(puntaje)) {
+            desafios.eliminar(puntaje);
+            FileManager.logBajaDesafio(puntaje);
+        } else {
+            Texto.desafioInexistente();
+        }
+    }
+
+    /**
+     * Modificacion de Desafio
+     *
+     * @param sc       Scanner
+     * @param desafios Arbol de Desafios
+     */
+    public static void modificacionDesafio(Scanner sc, ArbolAVL desafios) {
+        System.out.println("Ingrese el puntaje del desafio: ");
+        int puntaje = sc.nextInt();
+
+        if (desafios.pertenece(puntaje)) {
+            System.out.println("Ingrese el nuevo nombre del desafio: ");
+            String nombreDesafio = sc.nextLine();
+
+            System.out.println("Ingrese el nuevo tipo del desafio: ");
+            Texto.tipoDesafios();
+            char tipo = sc.nextLine().charAt(0);
+            TipoDesafio tipoDesafio = tipoDesafio(tipo);
+
+            Desafio desafio = (Desafio) desafios.encontrarElemento(puntaje);
+            desafio.setNombre(nombreDesafio);
+            desafio.setTipo(tipoDesafio);
+            FileManager.logModificacionDesafio(puntaje);
+        } else {
+            Texto.desafioInexistente();
+        }
+    }
+
+    // ****************************** ABM EQUIPOS ******************************
+
+    /**
+     * Alta de Equipo
+     *
+     * @param sc      Scanner
+     * @param equipos Arbol de Equipos
+     */
+    public static void altaEquipo(Scanner sc, HashMap<String, Equipo> equipos) {
+        boolean pertenece = false;
+        String nombreEquipo;
+        do {
+            System.out.println("Ingrese el nombre del equipo: ");
+            nombreEquipo = sc.nextLine();
+            pertenece = equipos.containsKey(nombreEquipo);
+            if (pertenece) {
+                System.out.println("El equipo ya existe");
+            }
+        } while (pertenece);
+
+        System.out.println("Ingrese el puntaje exigido del equipo para salir: ");
+        int puntajeExigido = sc.nextInt();
+
+        System.out.println("Ingrese el puntaje total del equipo: ");
+        int puntajeTotal = sc.nextInt();
+
+        System.out.println("Ingrese el puntaje actual del equipo: ");
+        int puntajeActual = sc.nextInt();
+
+        System.out.println("Ingrese el numero de habitacion actual del equipo: ");
+        int habitacionActual = sc.nextInt();
+
+        Equipo equipo = new Equipo(nombreEquipo, puntajeExigido, puntajeTotal, puntajeActual, habitacionActual);
+        equipos.put(nombreEquipo, equipo);
+        FileManager.logAltaEquipo(nombreEquipo);
+    }
+
+    /**
+     * Baja de Equipo
+     *
+     * @param sc      Scanner
+     * @param equipos Arbol de Equipos
+     */
+    public static void bajaEquipo(Scanner sc, HashMap<String, Equipo> equipos) {
+        System.out.println("Ingrese el nombre del equipo: ");
+        String nombreEquipo = sc.nextLine();
+
+        if (equipos.containsKey(nombreEquipo)) {
+            equipos.remove(nombreEquipo);
+            FileManager.logBajaEquipo(nombreEquipo);
+        } else {
+            Texto.equipoInexistente();
+        }
+    }
+
+    /**
+     * Modificacion de Equipo
+     *
+     * @param sc      Scanner
+     * @param equipos Arbol de Equipos
+     */
+    public static void modificacionEquipo(Scanner sc, HashMap<String, Equipo> equipos) {
+        System.out.println("Ingrese el nombre del equipo: ");
+        String nombreEquipo = sc.nextLine();
+
+        if (equipos.containsKey(nombreEquipo)) {
+            System.out.println("Ingrese el nuevo puntaje exigido del equipo para salir: ");
+            int puntajeExigido = sc.nextInt();
+
+            System.out.println("Ingrese el nuevo puntaje total del equipo: ");
+            int puntajeTotal = sc.nextInt();
+
+            System.out.println("Ingrese el nuevo puntaje actual del equipo: ");
+            int puntajeActual = sc.nextInt();
+
+            System.out.println("Ingrese el nuevo numero de habitacion actual del equipo: ");
+            int habitacionActual = sc.nextInt();
+
+            Equipo equipo = (Equipo) equipos.get(nombreEquipo);
+            equipo.setPuntajeExigido(puntajeExigido);
+            equipo.setPuntajeTotal(puntajeTotal);
+            equipo.setPuntajeActual(puntajeActual);
+            equipo.setHabitacionActual(habitacionActual);
+            FileManager.logModificacionEquipo(nombreEquipo);
+        } else {
+            Texto.equipoInexistente();
+        }
+    }
+
 
     // ****************************** CONSULTAS HABITACIONES ******************************
 
@@ -85,16 +482,19 @@ public class EscapeHouse {
                     break;
                 case '1':
                     // Habitaciones Contiguas
-                    habitacionesContiguas(sc, habitaciones, grafoCasa); // TODO: Terminar habitacionesContiguas
+                    habitacionesContiguas(sc, habitaciones, grafoCasa); // TODO: Terminar habitacionesContiguas???
                     break;
                 case '2':
                     // Es Posible Llegar
+                    esPosibleLlegar(); // TODO: Implementar esPosibleLlegar
                     break;
                 case '3':
                     // Maximo Puntaje
+                    maximoPuntaje(); // TODO: Implementar maximoPuntaje
                     break;
                 case '4':
                     // Sin Pasar Por
+                    sinPasarPor(sc,habitaciones); // TODO: Implementar sinPasarPor
                     break;
                 case '5':
                     // Volver al menu principal
@@ -130,13 +530,51 @@ public class EscapeHouse {
      * @param grafoCasa    Grafo de la casa
      */
     public static void habitacionesContiguas(Scanner sc, ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
+        System.out.println("Ingrese el codigo de la habitacion:");
         int nroHabitacion = sc.nextInt();
+
         Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(nroHabitacion);
         if (habitacion != null) {
-
+            System.out.println(grafoCasa.nodosContiguos(nroHabitacion));
         } else {
             Texto.habitacionInexistente();
         }
+    }
+
+    /**
+     * Dados los codigos de hab1 y hab2, y un valor k, mostrar si es o no posible llegar de hab1 a hab2, acumulando k puntos.
+     */
+    public static void esPosibleLlegar() {
+
+    }
+
+    /**
+     * Dados dos codigos de habitacion, mostrar el maximo puntaje que deberian acumular para ir de hab1 a hab2.
+     */
+    public static void maximoPuntaje() {
+
+    }
+
+    /**
+     * Dados tres codigos de habitacion y un valor numerico P, mostrar todas las formas de llegar desde hab1 a hab2 sin pasar por
+     * la tercera habitacion (hab3) que no requieran ganar mas de P puntos.
+     */
+    public static void sinPasarPor(Scanner sc, ArbolAVL habitaciones) {
+        System.out.println("Ingrese el codigo de la primera habitacion:");
+        int nroHabitacion1 = sc.nextInt();
+        System.out.println("Ingrese el codigo de la segunda habitacion:");
+        int nroHabitacion2 = sc.nextInt();
+        System.out.println("Ingrese el codigo de la tercera habitacion:");
+        int nroHabitacion3 = sc.nextInt();
+        System.out.println("Ingrese el puntaje maximo:");
+        int puntajeMaximo = sc.nextInt();
+
+        Habitacion habitacion1 = (Habitacion) habitaciones.encontrarElemento(nroHabitacion1);
+        Habitacion habitacion2 = (Habitacion) habitaciones.encontrarElemento(nroHabitacion2);
+        Habitacion habitacion3 = (Habitacion) habitaciones.encontrarElemento(nroHabitacion3);
+
+
+
     }
 
 
@@ -220,6 +658,8 @@ public class EscapeHouse {
      * @param desafiosPorEquipo HashMap de desafios por equipo
      */
     public static void verificarDesafioResuelto(Scanner sc, HashMap<String, Lista> desafiosPorEquipo, HashMap<String, Equipo> equipos, ArbolAVL desafios) {
+        boolean resuelto = false;
+        int i = 1;
         System.out.println("Ingrese el nombre del equipo: ");
         String nombreEquipo = sc.nextLine();
         System.out.println("Ingrese el nombre del desafio: ");
@@ -228,7 +668,15 @@ public class EscapeHouse {
         if (equipos.containsKey(nombreEquipo)) {
             Lista desafiosHechos = desafiosPorEquipo.get(nombreEquipo);
             if (desafiosHechos != null) {
-                if (desafiosHechos.desafioResuelto(nombreDesafio)) {
+                int cantDesafios = desafiosHechos.longitud();
+                while(i <= cantDesafios && !resuelto){
+                    Desafio desafio = (Desafio) desafiosHechos.recuperar(i);
+                    if(desafio.getNombre().equals(nombreDesafio)){
+                        resuelto = true;
+                    }
+                }
+
+                if (resuelto) {
                     Texto.desafioResuelto();
                 } else {
                     Texto.desafioNoResuelto();
@@ -256,34 +704,17 @@ public class EscapeHouse {
         Texto.tipoDesafios();
         char tipo = sc.nextLine().charAt(0);
 
-        switch (tipo) {
-            case 'B':
-                tipoDesafio = TipoDesafio.BUSQUEDA;
-                break;
-            case 'D':
-                tipoDesafio = TipoDesafio.DESTREZA;
-                break;
-            case 'L':
-                tipoDesafio = TipoDesafio.LOGICO;
-                break;
-            case 'M':
-                tipoDesafio = TipoDesafio.MATEMATICO;
-                break;
-            case 'I':
-                tipoDesafio = TipoDesafio.INGENIO;
-                break;
-            case 'E':
-                tipoDesafio = TipoDesafio.MEMORIA;
-                break;
-            default:
-                Texto.desafioInexistente();
-                break;
-        }
+        tipoDesafio = tipoDesafio(tipo);
 
-        Lista lista = desafios.mostrarDesafiosTipo(puntajeMin, puntajeMax, tipoDesafio);
+        Lista lista = desafios.listarRango(puntajeMin, puntajeMax);
+        
+        int cant = lista.longitud();
 
-        for (int i = 1; i <= lista.longitud(); i++) {
-            System.out.println(lista.recuperar(i));
+        for (int i = 1; i <= cant ; i++) {
+            Desafio desafio = (Desafio) lista.recuperar(i);
+            if (desafio.getTipo() == tipoDesafio) {
+                System.out.println(desafio.toString());
+            }
         }
     }
 
@@ -295,7 +726,7 @@ public class EscapeHouse {
      *
      * @param sc Scanner
      */
-    public static void consultaEquipos(Scanner sc, HashMap<String, Equipo> equipos) {
+    public static void consultaEquipos(Scanner sc, HashMap<String, Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo, ArbolAVL desafios,ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
         char opcion = '0';
         while (opcion != '4') {
             Texto.consultaEquipos();
@@ -306,15 +737,22 @@ public class EscapeHouse {
                     mostrarInfoEquipo(sc, equipos);
                     break;
                 case '1':
-                    // Mostrar Equipos Ordenados
+                    // Posibles Desafios
+                    posiblesDesafios();
                     break;
                 case '2':
-                    // Mostrar Equipos Resolvieron Desafio
+                    // Jugar Desafio
+                    jugarDesafio(sc, equipos, desafiosPorEquipo, desafios);
                     break;
                 case '3':
-                    // Mostrar Equipos Resolvieron Desafio Tipo
+                    // Pasar a Habitacion
+                    pasarAHabitacion( sc,  equipos,  habitaciones, grafoCasa);
                     break;
                 case '4':
+                    // Puede Salir
+                    puedeSalir(sc,equipos,habitaciones);
+                    break;
+                case '5':
                     // Volver al menu principal
                     break;
                 default:
@@ -340,5 +778,165 @@ public class EscapeHouse {
         }
     }
 
+    /**
+     * Dado un equipo y una habitacion hab, en caso en que hab sea adyacente al lugar donde este ubicado
+     * el equipo, mostrar todos los desafios que podría resolver el equipo para pasar a hab resolviendo un solo desafio.
+     * En caso en que hab no sea adyacente, mostrar un mensaje aclaratorio.
+     */
+    public static void posiblesDesafios() {
+
+    }
+
+
+    /**
+     * Dado el nombre del equipo, mostrar todos los desafios que puede resolver.
+     *
+     * @param sc                Scanner
+     * @param equipos           HashMap de equipos
+     * @param desafiosPorEquipo HashMap de desafios por equipo
+     * @param desafios          Arbol AVL de desafios
+     */
+    public static void jugarDesafio(Scanner sc, HashMap<String, Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo, ArbolAVL desafios) {
+        boolean encontrado = false;
+        boolean resuelto = false;
+        int i = 1;
+        Desafio desafio = null;
+        System.out.println("Ingrese el nombre del equipo: ");
+        String nombreEquipo = sc.nextLine();
+        System.out.println("Ingrese el nombre del desafio: ");
+        String nombreDesafio = sc.nextLine();
+
+        Equipo equipo = equipos.get(nombreEquipo);
+
+        if (equipo != null) {
+            Lista todosDesafios = desafios.listar();
+
+            while(i <= todosDesafios.longitud() && !encontrado){
+                Desafio desafioActual = (Desafio) todosDesafios.recuperar(i);
+                if(desafioActual.getNombre().equals(nombreDesafio)){
+                    encontrado = true;
+                    i = 1;
+                }
+            }
+
+            if (encontrado){
+                Lista desafiosHechos = desafiosPorEquipo.get(nombreEquipo);
+
+                while(i <= desafiosHechos.longitud() && !resuelto){
+                    desafio = (Desafio) desafiosHechos.recuperar(i);
+                    if(desafio.getNombre().equals(nombreDesafio)){
+                        resuelto = true;
+                    }
+                }
+
+                if (desafio == null) {
+                    desafiosPorEquipo.get(nombreEquipo).insertar(desafio, desafiosPorEquipo.get(nombreEquipo).longitud() + 1);
+                    equipo.setPuntajeActual(equipo.getPuntajeActual() + (int) desafio.getPuntaje());
+                } else {
+                    Texto.desafioResuelto();
+                }
+            } else {
+                Texto.desafioInexistente();
+            }
+        } else {
+            Texto.equipoInexistente();
+        }
+    }
+
+    /**
+     * Dado un equipo eq y una habitacion hab, verificar si es posible que el equipo eq pase a la habitacion hab
+     * (considerando si es contigua a la actual y el puntaje acumulado es suficiente) y en caso afirmativo actualizar
+     * los datos del equipo apropiadamente.
+     */
+    public static void pasarAHabitacion(Scanner sc, HashMap<String,Equipo> equipos, ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
+        System.out.println("Ingrese el nombre del equipo: ");
+        String nombreEquipo = sc.nextLine();
+
+        Equipo equipo = equipos.get(nombreEquipo);
+        if (equipo != null) {
+            System.out.println("Ingrese el numero de la habitacion: ");
+            int codigoHabitacion = sc.nextInt();
+            Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(codigoHabitacion);
+
+            if (habitacion != null) {
+                Habitacion habitacionActual = (Habitacion) habitaciones.encontrarElemento(equipo.getHabitacionActual());
+                int codigoHabitacionActual = (int) habitacionActual.getCodigo();
+                Desafio desafio = (Desafio) grafoCasa.obtenerEtiqueta(codigoHabitacion,codigoHabitacionActual);
+                if (desafio != null) {
+                    if((int) desafio.getPuntaje() <= equipo.getPuntajeActual()){
+                        equipo.setHabitacionActual(codigoHabitacion);
+                        Texto.siguienteHabitacion(nombreEquipo,codigoHabitacion);
+                    } else {
+                        Texto.puntajeInsuficiente(codigoHabitacion);
+                    }
+                } else {
+                    Texto.habitacionNoContigua(codigoHabitacion);
+                }
+            } else {
+                Texto.habitacionInexistente();
+            }
+        } else {
+            Texto.equipoInexistente();
+        }
+    }
+
+    /**
+     * Dado el nombre del equipo participante, decir si puede o no salir del juego en base al puntaje acumulado,
+     * al puntaje que debe obtener para ganar el juego y si la habitacion en la que se encuentra tiene o no salida al exterior.
+     *
+     * @param sc           Scanner
+     * @param equipos      HashMap de equipos
+     * @param habitaciones Arbol AVL de habitaciones
+     */
+    public static void puedeSalir(Scanner sc, HashMap<String, Equipo> equipos, ArbolAVL habitaciones) {
+        System.out.println("Ingrese el nombre del equipo: ");
+        String nombreEquipo = sc.nextLine();
+        Equipo equipo = equipos.get(nombreEquipo);
+        if (equipo != null) {
+            if (equipo.getPuntajeActual() >= equipo.getPuntajeExigido()) {
+                Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(equipo.getHabitacionActual());
+                if (habitacion.isSalidaExterior()) {
+                    Texto.puedeSalir((String) equipo.getNombre());
+                } else {
+                    Texto.noPuedeSalir((String) equipo.getNombre());
+                }
+            } else {
+                Texto.noPuedeSalir((String) equipo.getNombre());
+            }
+        } else {
+            Texto.equipoInexistente();
+        }
+    }
+
+
+    // ****************************** OTROS ******************************
+
+    private static TipoDesafio tipoDesafio(char tipo) {
+        TipoDesafio tipoDesafio = null;
+        switch (tipo) {
+            case 'B':
+                tipoDesafio = TipoDesafio.BUSQUEDA;
+                break;
+            case 'D':
+                tipoDesafio = TipoDesafio.DESTREZA;
+                break;
+            case 'L':
+                tipoDesafio = TipoDesafio.LOGICO;
+                break;
+            case 'M':
+                tipoDesafio = TipoDesafio.MATEMATICO;
+                break;
+            case 'I':
+                tipoDesafio = TipoDesafio.INGENIO;
+                break;
+            case 'E':
+                tipoDesafio = TipoDesafio.MEMORIA;
+                break;
+            default:
+                Texto.desafioInexistente();
+                break;
+        }
+        return tipoDesafio;
+    }
 
 }
