@@ -80,6 +80,8 @@ public class GrafoTest {
         FileManager.logAltaHabitacion(3);
         FileManager.logModificacionHabitacion(3);
         FileManager.logBajaHabitacion(3);
+//        FileManager.estadoInicial();
+
 
     }
 }

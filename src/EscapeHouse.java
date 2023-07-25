@@ -8,6 +8,7 @@ import model.TipoDesafio;
 import utiles.FileManager;
 import utiles.Texto;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -26,12 +27,15 @@ public class EscapeHouse {
         HashMap<String, Equipo> equipos = new HashMap<>();
         HashMap<String, Lista> desafiosPorEquipo = new HashMap<>(); //TODO: Ver si esta bien el 1 a muchos.
 
+        FileManager.inicioEjecucion();
+
         while (opcion != '6') {
             Texto.menuPrincipal();
             opcion = sc.nextLine().charAt(0);
             switch (opcion) {
                 case '0':
                     // Carga inicial del sistema
+                    FileManager.estadoInicial();        // TODO: Al cargar el sistema, no usar el abm, ya que los logs se van a entre cruzar, para la escritura en datos iniciales.
                     break;
                 case '1':
                     // ABM de Habitaciones, Desafios y Equipos
@@ -56,6 +60,8 @@ public class EscapeHouse {
                     break;
                 case '6':
                     // Salir
+                    FileManager.finEjecucion();
+                    FileManager.estadoFinal();
                     break;
                 default:
                     Texto.opcionInvalida();
@@ -78,7 +84,7 @@ public class EscapeHouse {
      * @param desafiosPorEquipo HashMap de Desafios por Equipo
      */
     public static void abm(Scanner sc, GrafoEtiquetado grafoCasa, ArbolAVL habitaciones, ArbolAVL desafios, HashMap<String, Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo) {
-        System.out.println("Ingrese una opcion: "); // TODO: Ver si la modificacion funciona, agregar Texto en las altas, bajas y modificaciones.
+        System.out.println("Ingrese una opcion: "); // TODO: Ver si la modificacion funciona, agregar Texto en las altas, bajas y modificaciones. Si ya existe, pedir hasta que no exista en la modificacion y alta.
         char opcion = sc.nextLine().charAt(0);
 
         switch (opcion) {
@@ -173,6 +179,7 @@ public class EscapeHouse {
 
         habitaciones.insertar(nroHabitacion, habitacion);
         grafoCasa.insertarVertice(nroHabitacion);
+        FileManager.altaHabitacion(habitacion);
         FileManager.logAltaHabitacion(nroHabitacion);
     }
 
@@ -187,7 +194,10 @@ public class EscapeHouse {
         System.out.println("Ingrese el numero de habitacion: ");
         int nroHabitacion = sc.nextInt();
 
-        if (habitaciones.pertenece(nroHabitacion)) {
+        Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(nroHabitacion);
+
+        if (habitacion != null) {
+            FileManager.bajaHabitacion(habitacion);
             habitaciones.eliminar(nroHabitacion);
             grafoCasa.eliminarVertice(nroHabitacion);
             System.out.println("La habitacion " + nroHabitacion + " se elimino correctamente");
@@ -208,7 +218,9 @@ public class EscapeHouse {
         System.out.println("Ingrese el numero de habitacion: ");
         int nroHabitacion = sc.nextInt();
 
-        if (habitaciones.pertenece(nroHabitacion)) {
+        Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(nroHabitacion);
+
+        if (habitacion != null) {
             System.out.println("Ingrese el nuevo nombre de la habitacion: ");
             String nombreHabitacion = sc.nextLine();
 
@@ -221,11 +233,13 @@ public class EscapeHouse {
             System.out.println("Ingrese si la habitacion tiene salida al exterior ('S' para SI, 'N' Para NO): ");
             boolean salidaAlExterior = sc.nextLine().charAt(0) == 'S';
 
-            Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(nroHabitacion);
-            habitacion.setNombre(nombreHabitacion);
-            habitacion.setPlanta(planta);
-            habitacion.setMetrosCuadrados(metrosCuadrados);
-            habitacion.setSalidaExterior(salidaAlExterior);
+            Habitacion habitacionMod = (Habitacion) habitaciones.encontrarElemento(nroHabitacion);
+            habitacionMod.setNombre(nombreHabitacion);
+            habitacionMod.setPlanta(planta);
+            habitacionMod.setMetrosCuadrados(metrosCuadrados);
+            habitacionMod.setSalidaExterior(salidaAlExterior);
+
+            FileManager.modificacionHabitacion(habitacion,habitacionMod);
 
             System.out.println("La habitacion " + nroHabitacion + " se modifico correctamente");
             FileManager.logModificacionHabitacion(nroHabitacion);
@@ -242,7 +256,7 @@ public class EscapeHouse {
      * @param sc        Scanner
      * @param grafoCasa Grafo de Habitaciones
      */
-    public static void altaPuerta(Scanner sc, GrafoEtiquetado grafoCasa) {
+    public static void altaPuerta(Scanner sc, GrafoEtiquetado grafoCasa) { //TODO: No puede haber una puerta con el mismo puntaje que otra
         System.out.println("Ingrese el numero de habitacion 1: ");
         int nroHabitacion1 = sc.nextInt();
 
@@ -253,6 +267,8 @@ public class EscapeHouse {
         int puntaje = sc.nextInt();
 
         grafoCasa.insertarArco(nroHabitacion1, nroHabitacion2, puntaje);
+        FileManager.altaPuerta(nroHabitacion1, nroHabitacion2, puntaje);
+        FileManager.logAltaPuerta(puntaje);
     }
 
     /**
@@ -268,7 +284,11 @@ public class EscapeHouse {
         System.out.println("Ingrese el numero de habitacion 2: ");
         int nroHabitacion2 = sc.nextInt();
 
+        int puntaje = (int) grafoCasa.obtenerEtiqueta(nroHabitacion1, nroHabitacion2);
+
         grafoCasa.eliminarArco(nroHabitacion1, nroHabitacion2);
+        FileManager.bajaPuerta(nroHabitacion1, nroHabitacion2,puntaje);
+        FileManager.logBajaPuerta(puntaje);
     }
 
     /**
@@ -286,10 +306,14 @@ public class EscapeHouse {
         int nroHabitacion2 = sc.nextInt();
 
         System.out.println("Ingrese los nuevos puntos necesarios para abrir la puerta: ");
-        int puntaje = sc.nextInt();
+        int puntajeMod = sc.nextInt();
+
+        int puntaje = (int) grafoCasa.obtenerEtiqueta(nroHabitacion1, nroHabitacion2);
 
         grafoCasa.eliminarArco(nroHabitacion1, nroHabitacion2);
-        grafoCasa.insertarArco(nroHabitacion1, nroHabitacion2, puntaje);
+        grafoCasa.insertarArco(nroHabitacion1, nroHabitacion2, puntajeMod);
+        FileManager.modificacionPuerta(nroHabitacion1, nroHabitacion2, puntaje, puntajeMod);
+        FileManager.logModificacionPuerta(puntaje);
     }
 
     // ****************************** ABM DESAFIOS ******************************
@@ -322,6 +346,7 @@ public class EscapeHouse {
 
         Desafio desafio = new Desafio(puntaje, nombreDesafio, tipoDesafio);
         desafios.insertar(puntaje, desafio);
+        FileManager.altaDesafio(desafio);
         FileManager.logAltaDesafio(puntaje);
     }
 
@@ -335,7 +360,10 @@ public class EscapeHouse {
         System.out.println("Ingrese el puntaje del desafio: ");
         int puntaje = sc.nextInt();
 
-        if (desafios.pertenece(puntaje)) {
+        Desafio desafio = (Desafio) desafios.encontrarElemento(puntaje);
+
+        if (desafio != null) {
+            FileManager.bajaDesafio(desafio);
             desafios.eliminar(puntaje);
             FileManager.logBajaDesafio(puntaje);
         } else {
@@ -353,7 +381,9 @@ public class EscapeHouse {
         System.out.println("Ingrese el puntaje del desafio: ");
         int puntaje = sc.nextInt();
 
-        if (desafios.pertenece(puntaje)) {
+        Desafio desafio = (Desafio) desafios.encontrarElemento(puntaje);
+
+        if (desafio != null) {
             System.out.println("Ingrese el nuevo nombre del desafio: ");
             String nombreDesafio = sc.nextLine();
 
@@ -362,9 +392,10 @@ public class EscapeHouse {
             char tipo = sc.nextLine().charAt(0);
             TipoDesafio tipoDesafio = tipoDesafio(tipo);
 
-            Desafio desafio = (Desafio) desafios.encontrarElemento(puntaje);
-            desafio.setNombre(nombreDesafio);
-            desafio.setTipo(tipoDesafio);
+            Desafio desafioMod = (Desafio) desafios.encontrarElemento(puntaje);
+            desafioMod.setNombre(nombreDesafio);
+            desafioMod.setTipo(tipoDesafio);
+            FileManager.modificacionDesafio(desafio, desafioMod);
             FileManager.logModificacionDesafio(puntaje);
         } else {
             Texto.desafioInexistente();
@@ -405,6 +436,7 @@ public class EscapeHouse {
 
         Equipo equipo = new Equipo(nombreEquipo, puntajeExigido, puntajeTotal, puntajeActual, habitacionActual);
         equipos.put(nombreEquipo, equipo);
+        FileManager.altaEquipo(equipo);
         FileManager.logAltaEquipo(nombreEquipo);
     }
 
@@ -418,7 +450,10 @@ public class EscapeHouse {
         System.out.println("Ingrese el nombre del equipo: ");
         String nombreEquipo = sc.nextLine();
 
-        if (equipos.containsKey(nombreEquipo)) {
+        Equipo equipo = equipos.get(nombreEquipo);
+
+        if (equipo != null) {
+            FileManager.bajaEquipo(equipo);
             equipos.remove(nombreEquipo);
             FileManager.logBajaEquipo(nombreEquipo);
         } else {
@@ -436,7 +471,9 @@ public class EscapeHouse {
         System.out.println("Ingrese el nombre del equipo: ");
         String nombreEquipo = sc.nextLine();
 
-        if (equipos.containsKey(nombreEquipo)) {
+        Equipo equipo = equipos.get(nombreEquipo); // TODO: Ver problema con referencia al objeto.
+
+        if (equipo != null) {
             System.out.println("Ingrese el nuevo puntaje exigido del equipo para salir: ");
             int puntajeExigido = sc.nextInt();
 
@@ -449,11 +486,12 @@ public class EscapeHouse {
             System.out.println("Ingrese el nuevo numero de habitacion actual del equipo: ");
             int habitacionActual = sc.nextInt();
 
-            Equipo equipo = (Equipo) equipos.get(nombreEquipo);
-            equipo.setPuntajeExigido(puntajeExigido);
-            equipo.setPuntajeTotal(puntajeTotal);
-            equipo.setPuntajeActual(puntajeActual);
-            equipo.setHabitacionActual(habitacionActual);
+            Equipo equipoMod = equipos.get(nombreEquipo);
+            equipoMod.setPuntajeExigido(puntajeExigido);
+            equipoMod.setPuntajeTotal(puntajeTotal);
+            equipoMod.setPuntajeActual(puntajeActual);
+            equipoMod.setHabitacionActual(habitacionActual);
+            FileManager.modificacionEquipo(equipo, equipoMod);
             FileManager.logModificacionEquipo(nombreEquipo);
         } else {
             Texto.equipoInexistente();
