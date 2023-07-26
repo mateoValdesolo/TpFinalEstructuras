@@ -5,11 +5,9 @@ import estructuras.GrafoEtiquetado;
 import model.Desafio;
 import model.Equipo;
 import model.Habitacion;
-import sun.util.logging.PlatformLogger;
+import model.TipoDesafio;
 
 import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -36,15 +34,15 @@ public class FileManager {
     }
 
     private static void escribirEnLog(String texto) throws IOException {
-            FileWriter file = new FileWriter(FileManager.getFile(), true);
-            BufferedWriter buff = new BufferedWriter(file);
+        FileWriter file = new FileWriter(FileManager.getFile(), true);
+        BufferedWriter buff = new BufferedWriter(file);
 
-            buff.write(texto);
-            buff.newLine();
+        buff.write(texto);
+        buff.newLine();
 
-            buff.flush();
-            buff.close();
-            file.close();
+        buff.flush();
+        buff.close();
+        file.close();
     }
 
     private static void escribirEnDatosIniciales(String texto) throws IOException {
@@ -166,18 +164,18 @@ public class FileManager {
 
     // ****************************** ABM ******************************
 
-    public static void altaDesafio(Desafio desafio){
+    public static void altaDesafio(Desafio desafio) {
         try {
-            String alta = formatDesafio(desafio);
+            String alta = formatDesafioToString(desafio);
             escribirEnDatosIniciales(alta);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error escribir el alta de un desafio en el archivo de datos iniciales", e);
         }
     }
 
-    public static void bajaDesafio(Desafio desafio){
+    public static void bajaDesafio(Desafio desafio) {
         try {
-            String baja = formatDesafio(desafio);
+            String baja = formatDesafioToString(desafio);
             eliminarLinea(baja);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error escribir la baja de un desafio en el archivo de datos iniciales", e);
@@ -185,27 +183,27 @@ public class FileManager {
     }
 
     public static void modificacionDesafio(Desafio desafio, Desafio modificado) {
-        try{
-            String desafioFormateado = formatDesafio(desafio);
-            String modificadoFormateado = formatDesafio(modificado);
-            modificarLinea(desafioFormateado,modificadoFormateado);
+        try {
+            String desafioFormateado = formatDesafioToString(desafio);
+            String modificadoFormateado = formatDesafioToString(modificado);
+            modificarLinea(desafioFormateado, modificadoFormateado);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error al escribir la modificacion de un desafio en el archivo de datos iniciales", e);
         }
     }
 
-    public static void altaEquipo(Equipo equipo){
+    public static void altaEquipo(Equipo equipo) {
         try {
-            String alta = formatEquipo(equipo);
+            String alta = formatEquipoToString(equipo);
             escribirEnDatosIniciales(alta);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error escribir el alta de un equipo en el archivo de datos iniciales", e);
         }
     }
 
-    public static void bajaEquipo(Equipo equipo){
+    public static void bajaEquipo(Equipo equipo) {
         try {
-            String baja = formatEquipo(equipo);
+            String baja = formatEquipoToString(equipo);
             eliminarLinea(baja);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error escribir la baja de un equipo en el archivo de datos iniciales", e);
@@ -213,27 +211,27 @@ public class FileManager {
     }
 
     public static void modificacionEquipo(Equipo equipo, Equipo modificado) {
-        try{
-            String equipoFormateado = formatEquipo(equipo);
-            String modificadoFormateado = formatEquipo(modificado);
-            modificarLinea(equipoFormateado,modificadoFormateado);
+        try {
+            String equipoFormateado = formatEquipoToString(equipo);
+            String modificadoFormateado = formatEquipoToString(modificado);
+            modificarLinea(equipoFormateado, modificadoFormateado);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error al escribir la modificacion de un equipo en el archivo de datos iniciales", e);
         }
     }
 
-    public static void altaHabitacion(Habitacion habitacion){
+    public static void altaHabitacion(Habitacion habitacion) {
         try {
-            String alta = formatHabitacion(habitacion);
+            String alta = formatHabitacionToString(habitacion);
             escribirEnDatosIniciales(alta);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error escribir el alta de una habitacion en el archivo de datos iniciales", e);
         }
     }
 
-    public static void bajaHabitacion(Habitacion habitacion){
+    public static void bajaHabitacion(Habitacion habitacion) {
         try {
-            String baja = formatHabitacion(habitacion);
+            String baja = formatHabitacionToString(habitacion);
             eliminarLinea(baja);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error escribir la baja de una habitacion en el archivo de datos iniciales", e);
@@ -241,38 +239,38 @@ public class FileManager {
     }
 
     public static void modificacionHabitacion(Habitacion habitacion, Habitacion modificado) {
-        try{
-            String habitacionFormateado = formatHabitacion(habitacion);
-            String modificadoFormateado = formatHabitacion(modificado);
-            modificarLinea(habitacionFormateado,modificadoFormateado);
+        try {
+            String habitacionFormateado = formatHabitacionToString(habitacion);
+            String modificadoFormateado = formatHabitacionToString(modificado);
+            modificarLinea(habitacionFormateado, modificadoFormateado);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error al escribir la modificacion de una habitacion en el archivo de datos iniciales", e);
         }
     }
 
-    public static void altaPuerta(int origen,int destino,int puntaje){
+    public static void altaPuerta(int origen, int destino, int puntaje) {
         try {
-            String alta = formatPuerta(origen,destino,puntaje);
+            String alta = formatPuertaToString(origen, destino, puntaje);
             escribirEnDatosIniciales(alta);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error escribir el alta de una puerta en el archivo de datos iniciales", e);
         }
     }
 
-    public static void bajaPuerta(int origen,int destino,int puntaje){
+    public static void bajaPuerta(int origen, int destino, int puntaje) {
         try {
-            String baja = formatPuerta(origen,destino,puntaje);
+            String baja = formatPuertaToString(origen, destino, puntaje);
             eliminarLinea(baja);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error escribir la baja de una puerta en el archivo de datos iniciales", e);
         }
     }
 
-    public static void modificacionPuerta(int origen,int destino,int puntaje,int modificadoPuntaje) {
-        try{
-            String puertaFormateado = formatPuerta(origen,destino,puntaje);
-            String modificadoFormateado = formatPuerta(origen,destino,modificadoPuntaje);
-            modificarLinea(puertaFormateado,modificadoFormateado);
+    public static void modificacionPuerta(int origen, int destino, int puntaje, int modificadoPuntaje) {
+        try {
+            String puertaFormateado = formatPuertaToString(origen, destino, puntaje);
+            String modificadoFormateado = formatPuertaToString(origen, destino, modificadoPuntaje);
+            modificarLinea(puertaFormateado, modificadoFormateado);
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error al escribir la modificacion de una puerta en el archivo de datos iniciales", e);
         }
@@ -405,6 +403,7 @@ public class FileManager {
 
     /**
      * Devuelve el archivo de datos iniciales.
+     *
      * @return Archivo de datos iniciales
      */
     private static File getReadFile() {
@@ -418,13 +417,49 @@ public class FileManager {
         return file;
     }
 
-    public static void cargarDesafios(ArbolAVL desafios){ // TODO: Terminar de implementar las cargas.
+    /**
+     * Carga los datos del archivo de datos iniciales.
+     * @param desafios
+     * @param equipos
+     * @param grafoCasa
+     * @param habitaciones
+     */
+    public static void cargarDatos(ArbolAVL desafios, HashMap<String, Equipo> equipos, GrafoEtiquetado grafoCasa, ArbolAVL habitaciones) { // TODO: Terminar de implementar las cargas.
         File file = FileManager.getReadFile();
+        String lineaActual;
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
-            while(br.readLine() != null){
-
+            while ((lineaActual = br.readLine()) != null) {
+                switch (lineaActual.charAt(0)) {
+                    case 'D': {
+                        Desafio desafio = formatDesafio(lineaActual);
+                        desafios.insertar(desafio.getPuntaje(),desafio);
+                        logAltaDesafio((int) desafio.getPuntaje());
+                    }
+                    break;
+                    case 'E': {
+                        Equipo equipo = formatEquipo(lineaActual);
+                        equipos.put((String) equipo.getNombre(), equipo);
+                        logAltaEquipo((String) equipo.getNombre());
+                    }
+                    break;
+                    case 'H': {
+                        Habitacion habitacion = formatHabitacion(lineaActual);
+                        habitaciones.insertar(habitacion.getCodigo(),habitacion);
+                        grafoCasa.insertarVertice(habitacion.getCodigo());
+                        logAltaHabitacion((int) habitacion.getCodigo());
+                    }
+                    break;
+                    case 'P': {
+                        String[] puerta = lineaActual.split(" ");
+                        grafoCasa.insertarArco(Integer.parseInt(puerta[1]), Integer.parseInt(puerta[2]), Integer.parseInt(puerta[3]));
+                        logAltaPuerta(Integer.parseInt(puerta[1]));
+                    }
+                    break;
+                    default:
+                        logger.log(Level.SEVERE, "Error al cargar datos iniciales, linea no reconocida: " + lineaActual);
+                }
             }
 
             br.close();
@@ -433,17 +468,6 @@ public class FileManager {
         }
     }
 
-    public static void cargarEquipos(HashMap<String, Equipo> equipos){
-
-    }
-
-    public static void cargarHabitaciones(GrafoEtiquetado grafoCasa,ArbolAVL habitaciones){
-
-    }
-
-    public static void cargarPuertas(GrafoEtiquetado grafoCasa){
-
-    }
 
     // ****************************** OTROS ******************************
 
@@ -474,45 +498,47 @@ public class FileManager {
 
     /**
      * Modifica una linea del archivo.
+     *
      * @param linea
      * @param nuevaLinea
      */
     private static void modificarLinea(String linea, String nuevaLinea) throws IOException {
 
-            File file = FileManager.getReadFile();
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line = "", oldText = "";
-            while ((line = reader.readLine()) != null) {
-                oldText += line + "\r\n";
-            }
-            reader.close();
+        File file = FileManager.getReadFile();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line = "", oldText = "";
+        while ((line = reader.readLine()) != null) {
+            oldText += line + "\r\n";
+        }
+        reader.close();
 
-            String newText = oldText.replaceAll(linea, nuevaLinea);
+        String newText = oldText.replaceAll(linea, nuevaLinea);
 
-            FileWriter writer = new FileWriter(file);
-            writer.write(newText);
-            writer.close();
+        FileWriter writer = new FileWriter(file);
+        writer.write(newText);
+        writer.close();
 
     }
 
     /**
      * Elimina una linea del archivo.
+     *
      * @param linea
      */
     private static void eliminarLinea(String linea) throws IOException {
-            File file = FileManager.getReadFile();
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line = "", oldText = "";
-            while ((line = reader.readLine()) != null) {
-                if (!line.equals(linea)) {
-                    oldText += line + "\r\n";
-                }
+        File file = FileManager.getReadFile();
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line = "", oldText = "";
+        while ((line = reader.readLine()) != null) {
+            if (!line.equals(linea)) {
+                oldText += line + "\r\n";
             }
-            reader.close();
+        }
+        reader.close();
 
-            FileWriter writer = new FileWriter(file);
-            writer.write(oldText);
-            writer.close();
+        FileWriter writer = new FileWriter(file);
+        writer.write(oldText);
+        writer.close();
     }
 
     // ****************************** FORMAT ******************************
@@ -524,7 +550,7 @@ public class FileManager {
      * @param desafio
      * @return Desafio formateado
      */
-    private static String formatDesafio(Desafio desafio) {
+    private static String formatDesafioToString(Desafio desafio) {
         String desafioFormateado = "D;";
         desafioFormateado += desafio.getPuntaje() + ";";
         desafioFormateado += desafio.getNombre() + ";";
@@ -540,7 +566,7 @@ public class FileManager {
      * @param equipo
      * @return Equipo formateado
      */
-    private static String formatEquipo(Equipo equipo) {
+    private static String formatEquipoToString(Equipo equipo) {
         String equipoFormateado = "E;";
         equipoFormateado += equipo.getNombre() + ";";
         equipoFormateado += equipo.getPuntajeExigido() + ";";
@@ -558,7 +584,7 @@ public class FileManager {
      * @param habitacion
      * @return Habitacion formateada
      */
-    private static String formatHabitacion(Habitacion habitacion) {
+    private static String formatHabitacionToString(Habitacion habitacion) {
         String habitacionFormateada = "H;";
         habitacionFormateada += habitacion.getCodigo() + ";";
         habitacionFormateada += habitacion.getNombre() + ";";
@@ -572,18 +598,96 @@ public class FileManager {
     /**
      * Formatea una puerta con el siguiente formato:
      * P;origen;destino;puntaje
+     *
      * @param origen
      * @param destino
      * @param puntaje
      * @return
      */
-    private static String formatPuerta(int origen, int destino, int puntaje){
+    private static String formatPuertaToString(int origen, int destino, int puntaje) {
         String puertaFormateada = "P;";
         puertaFormateada += origen + ";";
         puertaFormateada += destino + ";";
         puertaFormateada += puntaje;
 
         return puertaFormateada;
+    }
+
+    /**
+     * Convierte una linea del archivo a un desafio.
+     *
+     * @param linea
+     * @return Desafio formateado.
+     */
+    private static Desafio formatDesafio(String linea) {
+        String[] datos = linea.split(";");
+        int puntaje = Integer.parseInt(datos[1]);
+        String nombre = datos[2];
+        TipoDesafio tipo = tipoDesafio(datos[3]);
+
+        return new Desafio(puntaje, nombre, tipo);
+    }
+
+    /**
+     * Convierte una linea del archivo a un equipo.
+     *
+     * @param linea
+     * @return Equipo formateado.
+     */
+    private static Equipo formatEquipo(String linea) {
+        String[] datos = linea.split(";");
+        String nombre = datos[1];
+        int puntajeExigido = Integer.parseInt(datos[2]);
+        int puntajeTotal = Integer.parseInt(datos[3]);
+        int habitacionActual = Integer.parseInt(datos[4]);
+        int puntajeActual = Integer.parseInt(datos[5]);
+
+        return new Equipo(nombre, puntajeExigido, puntajeTotal, habitacionActual, puntajeActual);
+    }
+
+    /**
+     * Convierte una linea del archivo a una habitacion.
+     *
+     * @param linea
+     * @return Habitacion formateada.
+     */
+    private static Habitacion formatHabitacion(String linea) {
+        String[] datos = linea.split(";");
+        int codigo = Integer.parseInt(datos[1]);
+        String nombre = datos[2];
+        int planta = Integer.parseInt(datos[3]);
+        int metrosCuadrados = Integer.parseInt(datos[4]);
+        boolean salidaExterior = Boolean.parseBoolean(datos[5]);
+
+        return new Habitacion(codigo, nombre, planta, metrosCuadrados, salidaExterior);
+    }
+
+    private static TipoDesafio tipoDesafio(String tipo) {
+        TipoDesafio tipoDesafio = null;
+        switch (tipo) {
+            case "BUSQUEDA":
+                tipoDesafio = TipoDesafio.BUSQUEDA;
+                break;
+            case "DESTREZA":
+                tipoDesafio = TipoDesafio.DESTREZA;
+                break;
+            case "LOGICO":
+                tipoDesafio = TipoDesafio.LOGICO;
+                break;
+            case "MATEMATICO":
+                tipoDesafio = TipoDesafio.MATEMATICO;
+                break;
+            case "INGENIO":
+                tipoDesafio = TipoDesafio.INGENIO;
+                break;
+            case "MEMORIA":
+                tipoDesafio = TipoDesafio.MEMORIA;
+                break;
+            default:
+                logger.log(Level.SEVERE, "Tipo de desafio no encontrado.");
+                break;
+        }
+        return tipoDesafio;
     }
 
 

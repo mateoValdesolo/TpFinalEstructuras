@@ -36,6 +36,7 @@ public class EscapeHouse {
                 case '0':
                     // Carga inicial del sistema
                     FileManager.estadoInicial();        // TODO: Al cargar el sistema, no usar el abm, ya que los logs se van a entre cruzar, para la escritura en datos iniciales.
+                    FileManager.cargarDatos(desafios, equipos, grafoCasa, habitaciones); // TODO: que pasa con los desafios hechos hasta el momento? se pierden?
                     break;
                 case '1':
                     // ABM de Habitaciones, Desafios y Equipos
