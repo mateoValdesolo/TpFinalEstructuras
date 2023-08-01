@@ -92,7 +92,7 @@ public class ArbolAVL {
                         if (nodo.getClave().equals(this.raiz.getClave())) {
                             this.raiz = aux;
                         } else {
-                            padreAux.setIzquierdo(aux);
+                            padreAux.setDerecho(aux);
                             nodo.recalcularAltura();
                         }
                     }
@@ -463,11 +463,11 @@ public class ArbolAVL {
         } else {
             if (res < 0) {
                 if (nodo.getDerecho() != null) {
-                    ret = perteneceAux(nodo.getDerecho(), clave);
+                    ret = encontrarElementoAux(nodo.getDerecho(), clave);
                 }
             } else {
                 if (nodo.getIzquierdo() != null) {
-                    ret = perteneceAux(nodo.getIzquierdo(), clave);
+                    ret = encontrarElementoAux(nodo.getIzquierdo(), clave);
                 }
             }
         }

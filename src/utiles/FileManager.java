@@ -424,7 +424,7 @@ public class FileManager {
      * @param grafoCasa
      * @param habitaciones
      */
-    public static void cargarDatos(ArbolAVL desafios, HashMap<String, Equipo> equipos, GrafoEtiquetado grafoCasa, ArbolAVL habitaciones) { // TODO: Terminar de implementar las cargas.
+    public static void cargarDatos(ArbolAVL desafios, HashMap<String, Equipo> equipos, GrafoEtiquetado grafoCasa, ArbolAVL habitaciones) {
         File file = FileManager.getReadFile();
         String lineaActual;
         try {
@@ -452,7 +452,7 @@ public class FileManager {
                     }
                     break;
                     case 'P': {
-                        String[] puerta = lineaActual.split(" ");
+                        String[] puerta = lineaActual.split(";");
                         grafoCasa.insertarArco(Integer.parseInt(puerta[1]), Integer.parseInt(puerta[2]), Integer.parseInt(puerta[3]));
                         logAltaPuerta(Integer.parseInt(puerta[1]));
                     }
@@ -463,7 +463,7 @@ public class FileManager {
             }
 
             br.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.log(Level.SEVERE, "Error al cargar desafios", e);
         }
     }

@@ -56,7 +56,7 @@ public class Texto {
 
     public static void consultaHabitaciones() {
         encabezado("Consulta de Habitaciones");
-        System.out.println("0. Mostrar Habitacion" +
+        System.out.println("0. Mostrar Habitacion\n" +
                 "1. Habitaciones Contiguas\n" +
                 "2. Es Posible Llegar\n" +
                 "3. Maximo Puntaje\n" +

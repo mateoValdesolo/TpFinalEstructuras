@@ -7,7 +7,11 @@
     <list default="true" id="a9846a39-6f42-4f01-a7fb-990baa59a3ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EscapeHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscapeHouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/estructuras/ArbolAVL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/ArbolAVL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pruebas/GrafoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pruebas/GrafoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utiles/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utiles/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utiles/Texto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utiles/Texto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +62,7 @@
       <recent name="D:\Workspace\TpFinalEstructuras\src\estructuras" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.pruebas.GrafoTest">
+  <component name="RunManager" selected="Application.EscapeHouse">
     <configuration name="EscapeHouse" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="EscapeHouse" />
       <module name="TpFinalEstructuras" />
@@ -120,8 +124,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.pruebas.GrafoTest" />
         <item itemvalue="Application.EscapeHouse" />
+        <item itemvalue="Application.pruebas.GrafoTest" />
         <item itemvalue="Application.java.pruebas.GrafoTest" />
         <item itemvalue="Application.java.tests.GrafoTest" />
         <item itemvalue="Application.GrafoTest" />
@@ -155,6 +159,10 @@
       <workItem from="1689810569203" duration="2479000" />
       <workItem from="1690240712457" duration="4937000" />
       <workItem from="1690329497715" duration="3542000" />
+      <workItem from="1690417047253" duration="1699000" />
+      <workItem from="1690503064266" duration="4485000" />
+      <workItem from="1690846846025" duration="373000" />
+      <workItem from="1690847250315" duration="3480000" />
     </task>
     <servers />
   </component>
@@ -171,6 +179,20 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="estructuras.NodoAVL" memberName="izquierdo" />
+        <PinnedItemInfo parentTag="estructuras.ArbolAVL" memberName="raiz" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="this" />
+        <watch expression="padreAux" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

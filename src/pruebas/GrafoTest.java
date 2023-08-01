@@ -71,17 +71,129 @@ public class GrafoTest {
             System.out.println(lista.recuperar(i));
         }*/
 
-        FileManager.logAltaDesafio(1);
-        FileManager.logModificacionDesafio(1);
-        FileManager.logBajaDesafio(1);
-        FileManager.logAltaEquipo("Equipo 1");
-        FileManager.logModificacionEquipo("Equipo 1");
-        FileManager.logBajaEquipo("Equipo 1");
-        FileManager.logAltaHabitacion(3);
-        FileManager.logModificacionHabitacion(3);
-        FileManager.logBajaHabitacion(3);
+//        FileManager.logAltaDesafio(1);
+//        FileManager.logModificacionDesafio(1);
+//        FileManager.logBajaDesafio(1);
+//        FileManager.logAltaEquipo("Equipo 1");
+//        FileManager.logModificacionEquipo("Equipo 1");
+//        FileManager.logBajaEquipo("Equipo 1");
+//        FileManager.logAltaHabitacion(3);
+//        FileManager.logModificacionHabitacion(3);
+//        FileManager.logBajaHabitacion(3);
 //        FileManager.estadoInicial();
 
+        ArbolAVL arb1 = new ArbolAVL();
+        //CASOS DE INSERCION
+
+        //Caso 1a, inserto el 15.
+        /*arb1.insertar(20);
+        arb1.insertar(4);
+        arb1.insertar(15);
+        System.out.println(arb1.toString());*/
+
+        //Caso 2a, inserto el 15.
+        /*arb1.insertar(20);
+        arb1.insertar(4);
+        arb1.insertar(26);
+        arb1.insertar(3);
+        arb1.insertar(9);
+        arb1.insertar(15);
+        System.out.println(arb1.toString());*/
+
+        //Caso 3a, inserto el 15.
+        /*arb1.insertar(20,20);
+        arb1.insertar(4,20);
+        arb1.insertar(26,20);
+        arb1.insertar(3,20);
+        arb1.insertar(9,20);
+        arb1.insertar(21,21);
+        arb1.insertar(30,30);
+        arb1.insertar(2,2);
+        arb1.insertar(7,7);
+        arb1.insertar(11,11);
+        arb1.insertar(15,15);
+        System.out.println(arb1.toString());*/
+
+        //Caso 1b, inserto el 8.
+        /*arb1.insertar(20);
+        arb1.insertar(4);
+        arb1.insertar(8);
+        System.out.println(arb1.toString());*/
+
+        //Caso 2b, inserto el 8.
+        /*arb1.insertar(20,20);
+        arb1.insertar(4,4);
+        arb1.insertar(26,26);
+        arb1.insertar(3,3);
+        arb1.insertar(9,9);
+        arb1.insertar(8,8);
+        System.out.println(arb1.toString());*/
+
+        //Caso 3b, inserto el 8.
+        /*arb1.insertar(20);
+        arb1.insertar(4);
+        arb1.insertar(26);
+        arb1.insertar(3);
+        arb1.insertar(9);
+        arb1.insertar(21);
+        arb1.insertar(30);
+        arb1.insertar(2);
+        arb1.insertar(7);
+        arb1.insertar(11);
+        arb1.insertar(8);
+        System.out.println(arb1.toString());*/
+
+
+        //CASOS DE ELIMINACION
+
+        //Caso 1, elimino el 1.
+        /*arb1.insertar(2);
+        arb1.insertar(1);
+        arb1.insertar(4);
+        arb1.insertar(3);
+        arb1.insertar(5);
+        arb1.eliminar(1);
+        System.out.println(arb1.toString());*/
+
+        //Caso 2, elimino el 1.
+        /*arb1.insertar(6);
+        arb1.insertar(2);
+        arb1.insertar(9);
+        arb1.insertar(1);
+        arb1.insertar(4);
+        arb1.insertar(8);
+        arb1.insertar(11);
+        arb1.insertar(3);
+        arb1.insertar(5);
+        arb1.insertar(7);
+        arb1.insertar(10);
+        arb1.insertar(13);
+        arb1.insertar(15);
+        arb1.eliminar(1);
+        System.out.println(arb1.toString());*/
+
+        //Caso 3, elimino el 1.
+//        arb1.insertar(5,5);
+//        arb1.insertar(2,2);
+//        arb1.insertar(8,8);
+//        arb1.insertar(1,1);
+//        arb1.insertar(3,3);
+//        arb1.insertar(7,7);
+//        arb1.insertar(10,10);
+//        arb1.insertar(4,4);
+//        arb1.insertar(6,6);
+//        arb1.insertar(9,9);
+//        arb1.insertar(11,11);
+//        arb1.insertar(13,13);
+//        arb1.eliminar(1);
+//        System.out.println(arb1.toString());
+        arb1.insertar(1,1);
+        arb1.insertar(2,2);
+        arb1.insertar(3,3);
+        arb1.insertar(4,4);
+        arb1.insertar(5,5);
+        arb1.insertar(6,6);
+        System.out.println(arb1.toString());
 
     }
 }

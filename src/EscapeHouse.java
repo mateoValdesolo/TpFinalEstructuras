@@ -31,7 +31,7 @@ public class EscapeHouse {
 
         while (opcion != '6') {
             Texto.menuPrincipal();
-            opcion = sc.nextLine().charAt(0);
+            opcion = sc.next().charAt(0);
             switch (opcion) {
                 case '0':
                     // Carga inicial del sistema
@@ -86,7 +86,7 @@ public class EscapeHouse {
      */
     public static void abm(Scanner sc, GrafoEtiquetado grafoCasa, ArbolAVL habitaciones, ArbolAVL desafios, HashMap<String, Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo) {
         System.out.println("Ingrese una opcion: "); // TODO: Ver si la modificacion funciona, agregar Texto en las altas, bajas y modificaciones. Si ya existe, pedir hasta que no exista en la modificacion y alta.
-        char opcion = sc.nextLine().charAt(0);
+        char opcion = sc.next().charAt(0);
 
         switch (opcion) {
             case '0':
@@ -416,7 +416,7 @@ public class EscapeHouse {
         String nombreEquipo;
         do {
             System.out.println("Ingrese el nombre del equipo: ");
-            nombreEquipo = sc.nextLine();
+            nombreEquipo = sc.next();
             pertenece = equipos.containsKey(nombreEquipo);
             if (pertenece) {
                 System.out.println("El equipo ya existe");
@@ -513,7 +513,7 @@ public class EscapeHouse {
         char opcion = '0';
         while (opcion != '5') {
             Texto.consultaHabitaciones();
-            opcion = sc.nextLine().charAt(0);
+            opcion = sc.next().charAt(0);
             switch (opcion) {
                 case '0':
                     // Mostrar Habitacion
@@ -552,10 +552,11 @@ public class EscapeHouse {
      * @param habitaciones Arbol AVL de habitaciones
      */
     public static void mostrarHabitacion(Scanner sc, ArbolAVL habitaciones) {
+        System.out.println("Ingrese el codigo de la habitacion:");
         int nroHabitacion = sc.nextInt();
         Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(nroHabitacion);
         if (habitacion != null) {
-            habitacion.toString();
+            System.out.println(habitacion.toString());
         } else {
             Texto.habitacionInexistente();
         }
@@ -630,7 +631,7 @@ public class EscapeHouse {
         char opcion = '0';
         while (opcion != '4') {
             Texto.consultaDesafios();
-            opcion = sc.nextLine().charAt(0);
+            opcion = sc.next().charAt(0);
             switch (opcion) {
                 case '0':
                     // Mostrar Desafio
@@ -769,7 +770,7 @@ public class EscapeHouse {
         char opcion = '0';
         while (opcion != '4') {
             Texto.consultaEquipos();
-            opcion = sc.nextLine().charAt(0);
+            opcion = sc.next().charAt(0);
             switch (opcion) {
                 case '0':
                     // Mostrar Equipo
