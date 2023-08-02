@@ -297,4 +297,105 @@ public class GrafoEtiquetado {
         return ret;
     }
 
+    /**
+     * Dados dos elementos, verifica si es posible llegar desde el primero al segundo con la cantidad de puntos dados.
+     * @param origen
+     * @param destino
+     * @param puntos
+     * @return
+     */
+    public boolean esPosibleLlegar(Object origen,Object destino, int puntos){
+        boolean exito = false;
+
+        if(!this.esVacio()){
+            Lista visitados = new Lista();
+            NodoVert aux = encontrarVertice(origen);
+            NodoVert aux2 = encontrarVertice(destino);
+            if(aux.getElem().equals(aux2.getElem())){
+                exito = true;
+            } else {
+                exito = esPosibleLlegarAux(aux, aux2, puntos,visitados);
+            }
+        }
+        return exito;
+    }
+
+    private boolean esPosibleLlegarAux(NodoVert origen,NodoVert destino, int puntos, Lista visitados){
+        boolean exito = false;
+        int acum = 0;
+        if (origen != null){
+            if(origen.getElem().equals(destino.getElem()) && puntos >= 0){
+                exito = true;
+            } else {
+                visitados.insertar(origen.getElem(), visitados.longitud() + 1);
+                NodoAdy nodoAdy = origen.getPrimerAdy();
+
+                while(!exito && nodoAdy != null){
+                    acum = (int) nodoAdy.getEtiqueta();
+                    if(visitados.localizar(nodoAdy.getVertice().getElem()) < 0){
+                        if(puntos - acum >= 0){
+                            exito = esPosibleLlegarAux(nodoAdy.getVertice(), destino, puntos - acum, visitados);
+                        }
+                    }
+                    nodoAdy = nodoAdy.getSigAdyacente();
+                }
+                visitados.eliminar(visitados.longitud());
+            }
+        }
+        return exito;
+    }
+
+    /**
+     * Dados dos elementos, devuelve una lista con los caminos posibles entre ellos, evitando un cierto nodo, acumulando k puntos.
+     * @param origen
+     * @param destino
+     * @param evitado
+     * @param puntos
+     * @return
+     */
+    public Lista sinPasarPor(Object origen, Object destino, Object evitado, int puntos){
+        Lista res = new Lista();
+        Lista visitados = new Lista();
+
+        if(!this.esVacio()){
+            NodoVert aux = encontrarVertice(origen);
+            NodoVert aux2 = encontrarVertice(destino);
+            NodoVert aux3 = encontrarVertice(evitado);
+            if(aux.getElem().equals(aux2.getElem())){
+                res.insertar(origen, res.longitud()+1);
+            } else {
+                res = sinPasarPorAux(aux, aux2, aux3, puntos, visitados, res);
+            }
+        }
+        return res;
+    }
+
+    private Lista sinPasarPorAux(NodoVert origen, NodoVert destino, NodoVert evitado, int puntos, Lista visitados, Lista res){
+        int acum = 0;
+
+        if (origen != null){
+            visitados.insertar(origen.getElem(), visitados.longitud() + 1);
+
+            if(origen.getElem().equals(destino.getElem()) && puntos >= 0){
+                res.insertar(visitados.clone(), res.longitud() + 1);
+
+            } else {
+                NodoAdy nodoAdy = origen.getPrimerAdy();
+
+                while(nodoAdy != null){
+                    acum = (int) nodoAdy.getEtiqueta();
+
+                    if(visitados.localizar(nodoAdy.getVertice().getElem()) < 0 && !nodoAdy.getVertice().getElem().equals(evitado.getElem())){
+                        if(puntos - acum >= 0){
+                            res = sinPasarPorAux(nodoAdy.getVertice(), destino, evitado, puntos - acum, visitados, res);
+                        }
+                    }
+                    nodoAdy = nodoAdy.getSigAdyacente();
+                }
+            }
+            visitados.eliminar(visitados.longitud());
+        }
+        return res;
+    }
+
 }

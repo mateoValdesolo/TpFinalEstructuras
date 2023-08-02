@@ -525,7 +525,7 @@ public class EscapeHouse {
                     break;
                 case '2':
                     // Es Posible Llegar
-                    esPosibleLlegar(); // TODO: Implementar esPosibleLlegar
+                    esPosibleLlegar(sc, habitaciones, grafoCasa);
                     break;
                 case '3':
                     // Maximo Puntaje
@@ -533,7 +533,7 @@ public class EscapeHouse {
                     break;
                 case '4':
                     // Sin Pasar Por
-                    sinPasarPor(sc,habitaciones); // TODO: Implementar sinPasarPor
+                    sinPasarPor(sc,habitaciones,grafoCasa);
                     break;
                 case '5':
                     // Volver al menu principal
@@ -584,8 +584,26 @@ public class EscapeHouse {
     /**
      * Dados los codigos de hab1 y hab2, y un valor k, mostrar si es o no posible llegar de hab1 a hab2, acumulando k puntos.
      */
-    public static void esPosibleLlegar() {
+    public static void esPosibleLlegar(Scanner sc, ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
+        System.out.println("Ingrese el codigo de la primera habitacion:");
+        int nroHabitacion1 = sc.nextInt();
+        System.out.println("Ingrese el codigo de la segunda habitacion:");
+        int nroHabitacion2 = sc.nextInt();
+        System.out.println("Ingrese el puntaje maximo a obtener entre ambas habitaciones:");
+        int puntajeMaximo = sc.nextInt();
 
+        Habitacion habitacion1 = (Habitacion) habitaciones.encontrarElemento(nroHabitacion1);
+        Habitacion habitacion2 = (Habitacion) habitaciones.encontrarElemento(nroHabitacion2);
+
+        if(habitacion1 != null && habitacion2 != null) {
+            if (grafoCasa.esPosibleLlegar(nroHabitacion1, nroHabitacion2, puntajeMaximo)) {
+                System.out.println("Es posible llegar de la habitacion " + nroHabitacion1 + " a la habitacion " + nroHabitacion2 + " acumulando " + puntajeMaximo + " puntos.");
+            } else {
+                System.out.println("No es posible llegar de la habitacion " + nroHabitacion1 + " a la habitacion " + nroHabitacion2 + " acumulando " + puntajeMaximo + " puntos.");
+            }
+        } else {
+            Texto.habitacionInexistente();
+        }
     }
 
     /**
@@ -599,12 +617,12 @@ public class EscapeHouse {
      * Dados tres codigos de habitacion y un valor numerico P, mostrar todas las formas de llegar desde hab1 a hab2 sin pasar por
      * la tercera habitacion (hab3) que no requieran ganar mas de P puntos.
      */
-    public static void sinPasarPor(Scanner sc, ArbolAVL habitaciones) {
-        System.out.println("Ingrese el codigo de la primera habitacion:");
+    public static void sinPasarPor(Scanner sc, ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
+        System.out.println("Ingrese el codigo de la habitacion origen:");
         int nroHabitacion1 = sc.nextInt();
-        System.out.println("Ingrese el codigo de la segunda habitacion:");
+        System.out.println("Ingrese el codigo de la habitacion destino:");
         int nroHabitacion2 = sc.nextInt();
-        System.out.println("Ingrese el codigo de la tercera habitacion:");
+        System.out.println("Ingrese el codigo de la habitacion a evitar:");
         int nroHabitacion3 = sc.nextInt();
         System.out.println("Ingrese el puntaje maximo:");
         int puntajeMaximo = sc.nextInt();
@@ -613,8 +631,12 @@ public class EscapeHouse {
         Habitacion habitacion2 = (Habitacion) habitaciones.encontrarElemento(nroHabitacion2);
         Habitacion habitacion3 = (Habitacion) habitaciones.encontrarElemento(nroHabitacion3);
 
-
-
+        if(habitacion1 != null && habitacion2 != null && habitacion3 != null) {
+            System.out.println("Las formas de llegar desde la habitacion " + nroHabitacion1 + " a la habitacion " + nroHabitacion2 + " sin pasar por la habitacion " + nroHabitacion3 + " sin requerir "+puntajeMaximo+" puntos, son:");
+            System.out.println(grafoCasa.sinPasarPor(nroHabitacion1,nroHabitacion2, nroHabitacion3, puntajeMaximo).toString());
+        } else {
+            Texto.habitacionInexistente();
+        }
     }
 
 
@@ -901,7 +923,7 @@ public class EscapeHouse {
             if (habitacion != null) {
                 Habitacion habitacionActual = (Habitacion) habitaciones.encontrarElemento(equipo.getHabitacionActual());
                 int codigoHabitacionActual = (int) habitacionActual.getCodigo();
-                Desafio desafio = (Desafio) grafoCasa.obtenerEtiqueta(codigoHabitacion,codigoHabitacionActual);
+                Desafio desafio = (Desafio) grafoCasa.obtenerEtiqueta(codigoHabitacion,codigoHabitacionActual); // TODO: Ver esto
                 if (desafio != null) {
                     if((int) desafio.getPuntaje() <= equipo.getPuntajeActual()){
                         equipo.setHabitacionActual(codigoHabitacion);
