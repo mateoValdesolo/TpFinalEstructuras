@@ -25,8 +25,11 @@ public class Texto {
 
     public static void consultasGenerales(GrafoEtiquetado grafoCasa, ArbolAVL desafios, HashMap<String, Equipo> equipos) {
         encabezado("Consultas Generales");
+        System.out.println("Grafo de Habitaciones: ");
         mostrarHabitaciones(grafoCasa);
+        System.out.println("Arbol AVL de Desafios: ");
         mostrarDesafios(desafios);
+        System.out.println("HashMap de Equipos: ");
         mostrarEquipos(equipos);
         separador();
     }
@@ -137,7 +140,6 @@ public class Texto {
 
     private static void mostrarEquipos(HashMap<String, Equipo> equipos) {
         // No muestro la clave ya que es el nombre del grupo, y este esta incluido en el objeto.
-        System.out.println(equipos.toString());
         equipos.forEach((clave, equipo) ->
                 System.out.println(equipo.toString()));
     }

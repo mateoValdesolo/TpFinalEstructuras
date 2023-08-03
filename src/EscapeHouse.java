@@ -661,7 +661,7 @@ public class EscapeHouse {
                     break;
                 case '1':
                     // Mostrar Desafios Resueltos
-                    mostrarDesafiosResueltos(sc, desafiosPorEquipo);
+                    mostrarDesafiosResueltos(sc, equipos,desafiosPorEquipo);
                     break;
                 case '2':
                     // Verificar Desafio Resuelto
@@ -688,10 +688,11 @@ public class EscapeHouse {
      * @param desafios Arbol AVL de desafios
      */
     public static void mostrarDesafio(Scanner sc, ArbolAVL desafios) {
+        System.out.println("Ingrese el codigo del desafio:");
         int nroDesafio = sc.nextInt();
         Desafio desafio = (Desafio) desafios.encontrarElemento(nroDesafio);
         if (desafio != null) {
-            desafio.toString();
+            System.out.println(desafio.toString());
         } else {
             Texto.desafioInexistente();
         }
@@ -703,11 +704,18 @@ public class EscapeHouse {
      * @param sc                Scanner
      * @param desafiosPorEquipo HashMap de desafios por equipo
      */
-    public static void mostrarDesafiosResueltos(Scanner sc, HashMap<String, Lista> desafiosPorEquipo) {
-        String nombreEquipo = sc.nextLine();
-        Lista desafios = desafiosPorEquipo.get(nombreEquipo);
-        if (desafios != null) {
-            desafios.toString();
+    public static void mostrarDesafiosResueltos(Scanner sc,HashMap<String,Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo) {
+        System.out.println("Ingrese el nombre del equipo: ");
+        String nombreEquipo = sc.next();
+        Equipo equipo = equipos.get(nombreEquipo);
+
+        if (equipo != null) {
+            Lista desafios = desafiosPorEquipo.get(nombreEquipo);
+            if (desafios != null){
+                System.out.println(desafios.toString());
+            } else {
+                System.out.println("El equipo "+nombreEquipo+" no ha resuelto ningun desafio.");
+            }
         } else {
             Texto.equipoInexistente();
         }
@@ -720,12 +728,12 @@ public class EscapeHouse {
      * @param desafiosPorEquipo HashMap de desafios por equipo
      */
     public static void verificarDesafioResuelto(Scanner sc, HashMap<String, Lista> desafiosPorEquipo, HashMap<String, Equipo> equipos, ArbolAVL desafios) {
-        boolean resuelto = false;
+        boolean resuelto = false; // TODO: Tener en cuenta que el desafio puede no existir
         int i = 1;
         System.out.println("Ingrese el nombre del equipo: ");
-        String nombreEquipo = sc.nextLine();
+        String nombreEquipo = sc.next();
         System.out.println("Ingrese el nombre del desafio: ");
-        String nombreDesafio = sc.nextLine();
+        String nombreDesafio = sc.next();
 
         if (equipos.containsKey(nombreEquipo)) {
             Lista desafiosHechos = desafiosPorEquipo.get(nombreEquipo);
@@ -743,6 +751,8 @@ public class EscapeHouse {
                 } else {
                     Texto.desafioNoResuelto();
                 }
+            } else {
+                Texto.desafioNoResuelto();
             }
         } else {
             Texto.equipoInexistente();
@@ -760,11 +770,12 @@ public class EscapeHouse {
         TipoDesafio tipoDesafio = null;
 
         System.out.println("Ingrese puntaje minimo: ");
-        double puntajeMin = sc.nextDouble();
+        int puntajeMin = sc.nextInt();
         System.out.println("Ingrese puntaje maximo: ");
-        double puntajeMax = sc.nextDouble();
+        int puntajeMax = sc.nextInt();
+        System.out.println("Ingrese tipo de desafio: ");
         Texto.tipoDesafios();
-        char tipo = sc.nextLine().charAt(0);
+        char tipo = sc.next().charAt(0);
 
         tipoDesafio = tipoDesafio(tipo);
 
@@ -790,7 +801,7 @@ public class EscapeHouse {
      */
     public static void consultaEquipos(Scanner sc, HashMap<String, Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo, ArbolAVL desafios,ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
         char opcion = '0';
-        while (opcion != '4') {
+        while (opcion != '5') {
             Texto.consultaEquipos();
             opcion = sc.next().charAt(0);
             switch (opcion) {
@@ -831,10 +842,11 @@ public class EscapeHouse {
      * @param equipos HashMap de equipos
      */
     public static void mostrarInfoEquipo(Scanner sc, HashMap<String, Equipo> equipos) {
-        String nombreEquipo = sc.nextLine();
+        System.out.println("Ingrese el nombre del equipo: ");
+        String nombreEquipo = sc.next();
         Equipo equipo = equipos.get(nombreEquipo);
         if (equipo != null) {
-            equipo.toString();
+            System.out.println(equipo.toString());
         } else {
             Texto.equipoInexistente();
         }
@@ -864,9 +876,9 @@ public class EscapeHouse {
         int i = 1;
         Desafio desafio = null;
         System.out.println("Ingrese el nombre del equipo: ");
-        String nombreEquipo = sc.nextLine();
+        String nombreEquipo = sc.next();
         System.out.println("Ingrese el nombre del desafio: ");
-        String nombreDesafio = sc.nextLine();
+        String nombreDesafio = sc.next();
 
         Equipo equipo = equipos.get(nombreEquipo);
 
@@ -874,7 +886,8 @@ public class EscapeHouse {
             Lista todosDesafios = desafios.listar();
 
             while(i <= todosDesafios.longitud() && !encontrado){
-                Desafio desafioActual = (Desafio) todosDesafios.recuperar(i);
+                int nroDesafioActual = (int) todosDesafios.recuperar(i);
+                Desafio desafioActual = (Desafio) desafios.encontrarElemento(nroDesafioActual);
                 if(desafioActual.getNombre().equals(nombreDesafio)){
                     encontrado = true;
                 }
@@ -914,7 +927,7 @@ public class EscapeHouse {
      */
     public static void pasarAHabitacion(Scanner sc, HashMap<String,Equipo> equipos, ArbolAVL habitaciones, GrafoEtiquetado grafoCasa) {
         System.out.println("Ingrese el nombre del equipo: ");
-        String nombreEquipo = sc.nextLine();
+        String nombreEquipo = sc.next();
 
         Equipo equipo = equipos.get(nombreEquipo);
         if (equipo != null) {
@@ -955,7 +968,7 @@ public class EscapeHouse {
      */
     public static void puedeSalir(Scanner sc, HashMap<String, Equipo> equipos, ArbolAVL habitaciones) {
         System.out.println("Ingrese el nombre del equipo: ");
-        String nombreEquipo = sc.nextLine();
+        String nombreEquipo = sc.next();
         Equipo equipo = equipos.get(nombreEquipo);
         if (equipo != null) {
             if (equipo.getPuntajeActual() >= equipo.getPuntajeExigido()) {

@@ -7,7 +7,9 @@
     <list default="true" id="a9846a39-6f42-4f01-a7fb-990baa59a3ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EscapeHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscapeHouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utiles/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utiles/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utiles/Texto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utiles/Texto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +163,7 @@
       <workItem from="1690847250315" duration="3545000" />
       <workItem from="1690930113943" duration="4362000" />
       <workItem from="1691019078641" duration="172000" />
-      <workItem from="1691019618502" duration="2309000" />
+      <workItem from="1691019618502" duration="5780000" />
     </task>
     <servers />
   </component>
@@ -180,6 +182,24 @@
     </option>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="6" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/EscapeHouse.java</url>
+          <line>971</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/EscapeHouse.java</url>
+          <line>931</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="estructuras.NodoAVL" memberName="izquierdo" />

@@ -432,7 +432,7 @@ public class FileManager {
 
             while ((lineaActual = br.readLine()) != null) {
                 switch (lineaActual.charAt(0)) {
-                    case 'D': {
+                    case 'D': { //AVL Funciona mal, duplica desafios al ingresar el 3
                         Desafio desafio = formatDesafio(lineaActual);
                         desafios.insertar(desafio.getPuntaje(),desafio);
                         logAltaDesafio((int) desafio.getPuntaje());
@@ -684,7 +684,7 @@ public class FileManager {
                 tipoDesafio = TipoDesafio.MEMORIA;
                 break;
             default:
-                logger.log(Level.SEVERE, "Tipo de desafio no encontrado.");
+                logger.log(Level.SEVERE, "Tipo de desafio no encontrado. "+ tipo + " no es un tipo de desafio valido.");
                 break;
         }
         return tipoDesafio;
