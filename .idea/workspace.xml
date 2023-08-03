@@ -8,9 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EscapeHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscapeHouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pruebas/GrafoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pruebas/GrafoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/datosIniciales.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/datosIniciales.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +159,9 @@
       <workItem from="1690503064266" duration="4485000" />
       <workItem from="1690846846025" duration="373000" />
       <workItem from="1690847250315" duration="3545000" />
-      <workItem from="1690930113943" duration="4180000" />
+      <workItem from="1690930113943" duration="4362000" />
+      <workItem from="1691019078641" duration="172000" />
+      <workItem from="1691019618502" duration="2309000" />
     </task>
     <servers />
   </component>

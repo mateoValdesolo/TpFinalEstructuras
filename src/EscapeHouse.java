@@ -877,8 +877,8 @@ public class EscapeHouse {
                 Desafio desafioActual = (Desafio) todosDesafios.recuperar(i);
                 if(desafioActual.getNombre().equals(nombreDesafio)){
                     encontrado = true;
-                    i = 1;
                 }
+                i+=1;
             }
 
             if (encontrado){
@@ -889,11 +889,13 @@ public class EscapeHouse {
                     if(desafio.getNombre().equals(nombreDesafio)){
                         resuelto = true;
                     }
+                    i+=1;
                 }
 
-                if (desafio == null) {
+                if (!resuelto) {
                     desafiosPorEquipo.get(nombreEquipo).insertar(desafio, desafiosPorEquipo.get(nombreEquipo).longitud() + 1);
                     equipo.setPuntajeActual(equipo.getPuntajeActual() + (int) desafio.getPuntaje());
+                    equipo.setPuntajeTotal(equipo.getPuntajeTotal() + (int) desafio.getPuntaje());
                 } else {
                     Texto.desafioResuelto();
                 }
@@ -927,6 +929,7 @@ public class EscapeHouse {
                 if (desafio != null) {
                     if((int) desafio.getPuntaje() <= equipo.getPuntajeActual()){
                         equipo.setHabitacionActual(codigoHabitacion);
+                        equipo.setPuntajeActual(0);
                         Texto.siguienteHabitacion(nombreEquipo,codigoHabitacion);
                     } else {
                         Texto.puntajeInsuficiente(codigoHabitacion);
