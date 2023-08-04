@@ -73,7 +73,11 @@ public class ArbolAVL {
                         if (nodo.getClave().equals(this.raiz.getClave())) {
                             this.raiz = aux;
                         } else {
-                            padreAux.setDerecho(aux);
+                            if(aux.getClave().compareTo(padreAux.getClave()) < 0){
+                                padreAux.setIzquierdo(aux);
+                            } else {
+                                padreAux.setDerecho(aux);
+                            }
                             nodo.recalcularAltura();
                         }
                     }
@@ -92,7 +96,11 @@ public class ArbolAVL {
                         if (nodo.getClave().equals(this.raiz.getClave())) {
                             this.raiz = aux;
                         } else {
-                            padreAux.setDerecho(aux);
+                            if(aux.getClave().compareTo(padreAux.getClave()) < 0){
+                                padreAux.setIzquierdo(aux);
+                            } else {
+                                padreAux.setDerecho(aux);
+                            }
                             nodo.recalcularAltura();
                         }
                     }

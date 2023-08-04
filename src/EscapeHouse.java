@@ -786,7 +786,7 @@ public class EscapeHouse {
         for (int i = 1; i <= cant ; i++) {
             Desafio desafio = (Desafio) lista.recuperar(i);
             if (desafio.getTipo() == tipoDesafio) {
-                System.out.println(desafio.toString());
+                System.out.println(desafio);
             }
         }
     }
@@ -889,29 +889,46 @@ public class EscapeHouse {
                 int nroDesafioActual = (int) todosDesafios.recuperar(i);
                 Desafio desafioActual = (Desafio) desafios.encontrarElemento(nroDesafioActual);
                 if(desafioActual.getNombre().equals(nombreDesafio)){
+                    desafio = desafioActual;
                     encontrado = true;
                 }
                 i+=1;
             }
 
+
             if (encontrado){
                 Lista desafiosHechos = desafiosPorEquipo.get(nombreEquipo);
 
-                while(i <= desafiosHechos.longitud() && !resuelto){
-                    desafio = (Desafio) desafiosHechos.recuperar(i);
-                    if(desafio.getNombre().equals(nombreDesafio)){
-                        resuelto = true;
-                    }
-                    i+=1;
-                }
-
-                if (!resuelto) {
+                if(desafiosHechos == null){
+                    desafiosPorEquipo.put(nombreEquipo, new Lista());
                     desafiosPorEquipo.get(nombreEquipo).insertar(desafio, desafiosPorEquipo.get(nombreEquipo).longitud() + 1);
                     equipo.setPuntajeActual(equipo.getPuntajeActual() + (int) desafio.getPuntaje());
                     equipo.setPuntajeTotal(equipo.getPuntajeTotal() + (int) desafio.getPuntaje());
                 } else {
-                    Texto.desafioResuelto();
+                    if (!resuelto) {
+                        desafiosPorEquipo.get(nombreEquipo).insertar(desafio, desafiosPorEquipo.get(nombreEquipo).longitud() + 1);
+                        equipo.setPuntajeActual(equipo.getPuntajeActual() + (int) desafio.getPuntaje());
+                        equipo.setPuntajeTotal(equipo.getPuntajeTotal() + (int) desafio.getPuntaje());
+                    } else {
+                        Texto.desafioResuelto();
+                    }
                 }
+
+//                while(i <= desafiosHechos.longitud() && !resuelto){
+//                    desafio = (Desafio) desafiosHechos.recuperar(i);
+//                    if(desafio.getNombre().equals(nombreDesafio)){
+//                        resuelto = true;
+//                    }
+//                    i+=1;
+//                }
+//
+//                if (!resuelto) {
+//                    desafiosPorEquipo.get(nombreEquipo).insertar(desafio, desafiosPorEquipo.get(nombreEquipo).longitud() + 1);
+//                    equipo.setPuntajeActual(equipo.getPuntajeActual() + (int) desafio.getPuntaje());
+//                    equipo.setPuntajeTotal(equipo.getPuntajeTotal() + (int) desafio.getPuntaje());
+//                } else {
+//                    Texto.desafioResuelto();
+//                }
             } else {
                 Texto.desafioInexistente();
             }
@@ -938,7 +955,7 @@ public class EscapeHouse {
             if (habitacion != null) {
                 Habitacion habitacionActual = (Habitacion) habitaciones.encontrarElemento(equipo.getHabitacionActual());
                 int codigoHabitacionActual = (int) habitacionActual.getCodigo();
-                Desafio desafio = (Desafio) grafoCasa.obtenerEtiqueta(codigoHabitacion,codigoHabitacionActual); // TODO: Ver esto
+                Desafio desafio = (Desafio) grafoCasa.obtenerEtiqueta(codigoHabitacion,codigoHabitacionActual); // TODO: Ver esto, tengo que ver si las habitaciones son contiguas
                 if (desafio != null) {
                     if((int) desafio.getPuntaje() <= equipo.getPuntajeActual()){
                         equipo.setHabitacionActual(codigoHabitacion);

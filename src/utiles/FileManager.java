@@ -642,7 +642,7 @@ public class FileManager {
         int habitacionActual = Integer.parseInt(datos[4]);
         int puntajeActual = Integer.parseInt(datos[5]);
 
-        return new Equipo(nombre, puntajeExigido, puntajeTotal, habitacionActual, puntajeActual);
+        return new Equipo(nombre, puntajeExigido, puntajeTotal, puntajeActual, habitacionActual);
     }
 
     /**
