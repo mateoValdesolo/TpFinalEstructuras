@@ -35,7 +35,7 @@ public class EscapeHouse {
             switch (opcion) {
                 case '0':
                     // Carga inicial del sistema
-                    FileManager.estadoInicial();        // TODO: Al cargar el sistema, no usar el abm, ya que los logs se van a entre cruzar, para la escritura en datos iniciales.
+                    FileManager.estadoInicial();
                     FileManager.cargarDatos(desafios, equipos, grafoCasa, habitaciones); // TODO: que pasa con los desafios hechos hasta el momento? se pierden?
                     break;
                 case '1':
@@ -87,59 +87,60 @@ public class EscapeHouse {
     public static void abm(Scanner sc, GrafoEtiquetado grafoCasa, ArbolAVL habitaciones, ArbolAVL desafios, HashMap<String, Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo) {
         System.out.println("Ingrese una opcion: "); // TODO: Ver si la modificacion funciona, agregar Texto en las altas, bajas y modificaciones. Si ya existe, pedir hasta que no exista en la modificacion y alta.
         char opcion = sc.next().charAt(0);
-
-        switch (opcion) {
-            case '0':
-                // Alta de Habitacion
-                altaHabitacion(sc, habitaciones, grafoCasa);
-                break;
-            case 'a':
-                // Alta de Puerta
-                altaPuerta(sc, grafoCasa);
-                break;
-            case '1':
-                // Baja de Habitacion
-                bajaHabitacion(sc, habitaciones, grafoCasa);
-                break;
-            case 'b':
-                // Baja de Puerta
-                bajaPuerta(sc, grafoCasa);
-                break;
-            case '2':
-                // Modificacion de Habitacion
-                modificacionHabitacion(sc, habitaciones, grafoCasa);
-                break;
-            case 'c':
-                // Modificacion de Puerta
-                modificacionPuerta(sc, grafoCasa);
-                break;
-            case '3':
-                // Alta de Desafio
-                altaDesafio(sc, desafios);
-                break;
-            case '4':
-                // Baja de Desafio
-                bajaDesafio(sc, desafios);
-                break;
-            case '5':
-                // Modificacion de Desafio
-                modificacionDesafio(sc, desafios);
-                break;
-            case '6':
-                // Alta de Equipo
-                altaEquipo(sc, equipos);
-                break;
-            case '7':
-                // Baja de Equipo
-                bajaEquipo(sc, equipos);
-                break;
-            case '8':
-                // Modificacion de Equipo
-                modificacionEquipo(sc, equipos);
-                break;
-            case '9':
-                // Volver al menu principal
-                break;
+        while(opcion != '9') {
+            switch (opcion) {
+                case '0':
+                    // Alta de Habitacion
+                    altaHabitacion(sc, habitaciones, grafoCasa);
+                    break;
+                case 'a':
+                    // Alta de Puerta
+                    altaPuerta(sc, grafoCasa);
+                    break;
+                case '1':
+                    // Baja de Habitacion
+                    bajaHabitacion(sc, habitaciones, grafoCasa);
+                    break;
+                case 'b':
+                    // Baja de Puerta
+                    bajaPuerta(sc, grafoCasa);
+                    break;
+                case '2':
+                    // Modificacion de Habitacion
+                    modificacionHabitacion(sc, habitaciones, grafoCasa);
+                    break;
+                case 'c':
+                    // Modificacion de Puerta
+                    modificacionPuerta(sc, grafoCasa);
+                    break;
+                case '3':
+                    // Alta de Desafio
+                    altaDesafio(sc, desafios);
+                    break;
+                case '4':
+                    // Baja de Desafio
+                    bajaDesafio(sc, desafios);
+                    break;
+                case '5':
+                    // Modificacion de Desafio
+                    modificacionDesafio(sc, desafios);
+                    break;
+                case '6':
+                    // Alta de Equipo
+                    altaEquipo(sc, equipos);
+                    break;
+                case '7':
+                    // Baja de Equipo
+                    bajaEquipo(sc, equipos);
+                    break;
+                case '8':
+                    // Modificacion de Equipo
+                    modificacionEquipo(sc, equipos);
+                    break;
+                case '9':
+                    // Volver al menu principal
+                    break;
+            }
         }
     }
 
@@ -521,7 +522,7 @@ public class EscapeHouse {
                     break;
                 case '1':
                     // Habitaciones Contiguas
-                    habitacionesContiguas(sc, habitaciones, grafoCasa); // TODO: Terminar habitacionesContiguas???
+                    habitacionesContiguas(sc, habitaciones, grafoCasa);
                     break;
                 case '2':
                     // Es Posible Llegar
@@ -913,22 +914,6 @@ public class EscapeHouse {
                         Texto.desafioResuelto();
                     }
                 }
-
-//                while(i <= desafiosHechos.longitud() && !resuelto){
-//                    desafio = (Desafio) desafiosHechos.recuperar(i);
-//                    if(desafio.getNombre().equals(nombreDesafio)){
-//                        resuelto = true;
-//                    }
-//                    i+=1;
-//                }
-//
-//                if (!resuelto) {
-//                    desafiosPorEquipo.get(nombreEquipo).insertar(desafio, desafiosPorEquipo.get(nombreEquipo).longitud() + 1);
-//                    equipo.setPuntajeActual(equipo.getPuntajeActual() + (int) desafio.getPuntaje());
-//                    equipo.setPuntajeTotal(equipo.getPuntajeTotal() + (int) desafio.getPuntaje());
-//                } else {
-//                    Texto.desafioResuelto();
-//                }
             } else {
                 Texto.desafioInexistente();
             }
@@ -955,11 +940,11 @@ public class EscapeHouse {
             if (habitacion != null) {
                 Habitacion habitacionActual = (Habitacion) habitaciones.encontrarElemento(equipo.getHabitacionActual());
                 int codigoHabitacionActual = (int) habitacionActual.getCodigo();
-                Desafio desafio = (Desafio) grafoCasa.obtenerEtiqueta(codigoHabitacion,codigoHabitacionActual); // TODO: Ver esto, tengo que ver si las habitaciones son contiguas
-                if (desafio != null) {
-                    if((int) desafio.getPuntaje() <= equipo.getPuntajeActual()){
+                int puntajeNecesario = (int) grafoCasa.obtenerEtiqueta(codigoHabitacion,codigoHabitacionActual); // TODO: Ver esto, tengo que ver si las habitaciones son contiguas
+                if (puntajeNecesario > 0) {
+                    if(puntajeNecesario<= equipo.getPuntajeActual()){
                         equipo.setHabitacionActual(codigoHabitacion);
-                        equipo.setPuntajeActual(0);
+                        //equipo.setPuntajeActual(0);
                         Texto.siguienteHabitacion(nombreEquipo,codigoHabitacion);
                     } else {
                         Texto.puntajeInsuficiente(codigoHabitacion);
@@ -988,7 +973,7 @@ public class EscapeHouse {
         String nombreEquipo = sc.next();
         Equipo equipo = equipos.get(nombreEquipo);
         if (equipo != null) {
-            if (equipo.getPuntajeActual() >= equipo.getPuntajeExigido()) {
+            if (equipo.getPuntajeTotal() >= equipo.getPuntajeExigido()) {
                 Habitacion habitacion = (Habitacion) habitaciones.encontrarElemento(equipo.getHabitacionActual());
                 if (habitacion.isSalidaExterior()) {
                     Texto.puedeSalir((String) equipo.getNombre());

@@ -7,6 +7,7 @@
     <list default="true" id="a9846a39-6f42-4f01-a7fb-990baa59a3ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EscapeHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscapeHouse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +164,7 @@
       <workItem from="1691019078641" duration="172000" />
       <workItem from="1691019618502" duration="5804000" />
       <workItem from="1691107767563" duration="5507000" />
-      <workItem from="1691625126991" duration="1860000" />
+      <workItem from="1691625126991" duration="3547000" />
     </task>
     <servers />
   </component>
@@ -188,6 +189,11 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="6" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/EscapeHouse.java</url>
+          <line>937</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
