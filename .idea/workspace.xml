@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a9846a39-6f42-4f01-a7fb-990baa59a3ee" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EscapeHouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EscapeHouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/estructuras/GrafoEtiquetado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/datosIniciales.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/datosIniciales.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utiles/Texto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utiles/Texto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +166,9 @@
       <workItem from="1691019078641" duration="172000" />
       <workItem from="1691019618502" duration="5804000" />
       <workItem from="1691107767563" duration="5507000" />
-      <workItem from="1691625126991" duration="3547000" />
+      <workItem from="1691625126991" duration="3601000" />
+      <workItem from="1692055569257" duration="5682000" />
+      <workItem from="1692064569149" duration="161000" />
     </task>
     <servers />
   </component>
@@ -189,11 +193,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="6" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/EscapeHouse.java</url>
-          <line>937</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -217,5 +216,6 @@
     <SUITE FILE_PATH="coverage/TpFinalEstructuras$pruebas_GrafoTest.ic" NAME="pruebas.GrafoTest Coverage Results" MODIFIED="1691108588745" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>pruebas.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/TpFinalEstructuras$EscapeHouse.ic" NAME="EscapeHouse Coverage Results" MODIFIED="1692059133349" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

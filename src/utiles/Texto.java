@@ -152,6 +152,14 @@ public class Texto {
         System.out.println("El equipo " + nombreEquipo + " no puede salir");
     }
 
+    public static void habitacionActual(int nroHabitacion) {
+        System.out.println("El equipo ya se encuentra en la habitacion "+nroHabitacion);
+    }
+
+    public static void equipoModificado(String nombreEquipo) {
+        System.out.println("El equipo "+nombreEquipo+" fue modificado con exito");
+    }
+
     // ********** VARIOS **********
 
     private static void encabezado(String titulo) {

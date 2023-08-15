@@ -398,4 +398,77 @@ public class GrafoEtiquetado {
         return res;
     }
 
+    /**
+     * Dado un elemento, verifica si existe un arco con esa etiqueta.
+     * @param elem
+     * @return existe
+     */
+    public boolean existeEtiquete(Object elem){
+        boolean existe = false;
+        NodoVert aux = this.inicio;
+        NodoAdy nodoAdy;
+
+        while(aux != null && !existe){
+            nodoAdy = aux.getPrimerAdy();
+            while(nodoAdy != null && !existe){
+                if(nodoAdy.getEtiqueta().equals(elem)){
+                    existe = true;
+                } else {
+                    nodoAdy = nodoAdy.getSigAdyacente();
+                }
+            }
+            aux = aux.getSigVertice();
+        }
+        return existe;
+    }
+
+    /**
+     * Dados dos codigos de habitacion, mostrar el maximo puntaje que deberian acumular para ir de hab1 a hab2.
+     * @param hab1
+     * @param hab2
+     * @return puntaje
+     */
+    public int maxPuntaje(Object hab1, Object hab2) {
+        int puntaje = 0;
+        NodoVert aux = encontrarVertice(hab1);
+        NodoVert aux2 = encontrarVertice(hab2);
+        Lista visitados = new Lista();
+
+        if (aux != null && aux2 != null) {
+            if (aux.getElem().equals(aux2.getElem())) {
+                puntaje = 0;
+            } else {
+                puntaje = maxPuntajeAux(aux, aux2, visitados);
+            }
+        }
+        return puntaje;
+    }
+
+    private int maxPuntajeAux(NodoVert origen, NodoVert destino, Lista visitados){
+        int puntaje = 0;
+        int max = 0;
+        int acum = 0;
+        if (origen != null){
+            visitados.insertar(origen.getElem(), visitados.longitud() + 1);
+            if(origen.getElem().equals(destino.getElem())){
+                puntaje = 0;
+            } else {
+                NodoAdy nodoAdy = origen.getPrimerAdy();
+                while(nodoAdy != null){
+                    acum = (int) nodoAdy.getEtiqueta();
+                    if(visitados.localizar(nodoAdy.getVertice().getElem()) < 0){
+                        puntaje = maxPuntajeAux(nodoAdy.getVertice(), destino, visitados);
+                        if(puntaje + acum > max){
+                            max = puntaje + acum;
+                        }
+                    }
+                    nodoAdy = nodoAdy.getSigAdyacente();
+                }
+                puntaje = max;
+            }
+            visitados.eliminar(visitados.longitud());
+        }
+        return puntaje;
+    }
+
 }
