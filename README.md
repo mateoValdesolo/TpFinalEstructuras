@@ -39,13 +39,13 @@ Se pide el desarrollo de este juego con un menú de opciones que permitan realiz
   En modificaciones no debe permitir modificar los atributos clave.
 
 
-- [ ] **3. Consulta sobre habitaciones:**
-    - [x]	**mostrarHabitación:** Dado un código de habitación, mostrar toda la información sobre la misma.
+- [x] **3. Consulta sobre habitaciones:**
+    - [x] **mostrarHabitación:** Dado un código de habitación, mostrar toda la información sobre la misma.
     - [x] **habitacionesContiguas:** Dado un código de habitación, mostrar las habitaciones contiguas a las que se puede
       acceder, y qué puntaje se necesitaría para pasar a cada una.
     - [x] **esPosibleLlegar:** Dados los códigos de hab1 y hab2, y un valor k, mostrar si es o no posible llegar de hab1
       a hab2, acumulando k puntos.
-    - [ ] **maximoPuntaje:** Dados dos códigos de habitación, mostrar el máximo puntaje que deberían acumular para ir de
+    - [x] **maximoPuntaje:** Dados dos códigos de habitación, mostrar el máximo puntaje que deberían acumular para ir de
       hab1 a hab2 (**).
     - [x] **sinPasarPor:** Dados tres códigos de habitación y un valor numérico P, mostrar todas las formas de llegar
       desde hab1 a hab2 sin pasar por la tercera habitación (hab3) que no requieran ganar más de P puntos.
@@ -59,9 +59,9 @@ Se pide el desarrollo de este juego con un menú de opciones que permitan realiz
       puntaje en el rango [a, b] (por ejemplo, listar todos los desafíos de tipo lógico con puntaje entre 30 y 55).
 
 
-- [ ] **5. Consulta sobre equipos participantes:**
+- [x] **5. Consulta sobre equipos participantes:**
     - [x] **mostrarInfoEquipo:** Dado el nombre del equipo, mostrar todos sus datos.
-    - [ ] **posiblesDesafios:** Dado un equipo y una habitación hab, en caso en que hab sea adyacente al lugar donde
+    - [x] **posiblesDesafios:** Dado un equipo y una habitación hab, en caso en que hab sea adyacente al lugar donde
       esté ubicado el equipo, mostrar todos los desafíos que podría resolver el equipo para pasar a hab resolviendo un
       solo desafío. En caso en que hab no sea adyacente, mostrar un mensaje aclaratorio (**).
     - [x] **jugarDesafío:** Dado un equipo eq y un desafío, marcar el desafío como ganado y actualizar los datos del

@@ -825,7 +825,7 @@ public class EscapeHouse {
                     break;
                 case '1':
                     // Posibles Desafios
-                    posiblesDesafios();
+                    posiblesDesafios(sc,grafoCasa,equipos,desafiosPorEquipo,desafios); // TODO: Implementar
                     break;
                 case '2':
                     // Jugar Desafio
@@ -871,8 +871,44 @@ public class EscapeHouse {
      * el equipo, mostrar todos los desafios que podría resolver el equipo para pasar a hab resolviendo un solo desafio.
      * En caso en que hab no sea adyacente, mostrar un mensaje aclaratorio.
      */
-    public static void posiblesDesafios() {
+    public static void posiblesDesafios(Scanner sc,GrafoEtiquetado grafoCasa,HashMap<String,Equipo> equipos,HashMap<String, Lista> desafiosPorEquipo, ArbolAVL desafios) {
+        int puntosNecesarios = 0;
+        System.out.println("Ingrese el nombre del equipo: ");
+        String nombreEquipo = sc.next();
+        System.out.println("Ingrese el numero de la habitacion: ");
+        int numeroHabitacion = sc.nextInt();
 
+        if(equipos.containsKey(nombreEquipo)){
+            Equipo equipo = equipos.get(nombreEquipo);
+
+            if(grafoCasa.existeArco(numeroHabitacion, equipo.getHabitacionActual())){
+                puntosNecesarios = (int) grafoCasa.obtenerEtiqueta(numeroHabitacion, equipo.getHabitacionActual());
+
+                Lista listaDesafios = desafios.listar();
+                Lista listaDesafiosPosibles = new Lista();
+
+                for (int i = 1; i < listaDesafios.longitud(); i++) {
+                    int numDesafio = (int) listaDesafios.recuperar(i);
+                    Desafio desafio = (Desafio) desafios.encontrarElemento(numDesafio);
+                    if (((int)desafio.getPuntaje() >= puntosNecesarios)) {
+                        if(desafiosPorEquipo.get(nombreEquipo) != null){
+                            if(desafiosPorEquipo.get(nombreEquipo).localizar(desafio) == -1){
+                                listaDesafiosPosibles.insertar(desafio, listaDesafiosPosibles.longitud() + 1);
+                            }
+                        } else {
+                            listaDesafiosPosibles.insertar(desafio, listaDesafiosPosibles.longitud() + 1);
+                        }
+                    }
+                }
+
+                System.out.println("Desafios posibles: ");
+                System.out.println(listaDesafiosPosibles);
+            } else {
+                Texto.habitacionNoContigua(numeroHabitacion);
+            }
+        } else {
+            Texto.equipoInexistente();
+        }
     }
 
 
