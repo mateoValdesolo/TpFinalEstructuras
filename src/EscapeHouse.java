@@ -758,6 +758,7 @@ public class EscapeHouse {
                     if (desafio.getNombre().equals(nombreDesafio)) {
                         resuelto = true;
                     }
+                    i++;
                 }
 
                 if (resuelto) {
@@ -954,11 +955,13 @@ public class EscapeHouse {
                     desafiosPorEquipo.get(nombreEquipo).insertar(desafio, desafiosPorEquipo.get(nombreEquipo).longitud() + 1);
                     equipo.setPuntajeActual(equipo.getPuntajeActual() + (int) desafio.getPuntaje());
                     equipo.setPuntajeTotal(equipo.getPuntajeTotal() + (int) desafio.getPuntaje());
+                    Texto.desafioResueltoPorEquipo(desafio.getNombre(),nombreEquipo);
                 } else {
                     if (!resuelto) {
                         desafiosPorEquipo.get(nombreEquipo).insertar(desafio, desafiosPorEquipo.get(nombreEquipo).longitud() + 1);
                         equipo.setPuntajeActual(equipo.getPuntajeActual() + (int) desafio.getPuntaje());
                         equipo.setPuntajeTotal(equipo.getPuntajeTotal() + (int) desafio.getPuntaje());
+                        Texto.desafioResueltoPorEquipo(desafio.getNombre(),nombreEquipo);
                     } else {
                         Texto.desafioResuelto();
                     }

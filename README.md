@@ -65,7 +65,8 @@ Se pide el desarrollo de este juego con un menú de opciones que permitan realiz
       esté ubicado el equipo, mostrar todos los desafíos que podría resolver el equipo para pasar a hab resolviendo un
       solo desafío. En caso en que hab no sea adyacente, mostrar un mensaje aclaratorio (**).
     - [x] **jugarDesafío:** Dado un equipo eq y un desafío, marcar el desafío como ganado y actualizar los datos del
-      equipo apropiadamente. ⦁ pasarAHabitacion: Dado un equipo eq y una habitación hab, verificar si es posible que el
+      equipo apropiadamente. 
+    - [x] **pasarAHabitacion:** Dado un equipo eq y una habitación hab, verificar si es posible que el
       equipo eq pase a la habitación hab (considerando si es contigua a la actual y el puntaje acumulado es suficiente)
       y en caso afirmativo actualizar los datos del equipo apropiadamente.
     - [x] **puedeSalir:** Dado el nombre del equipo participante, decir si puede o no salir del juego en base al puntaje
