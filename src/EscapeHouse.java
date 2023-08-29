@@ -25,7 +25,7 @@ public class EscapeHouse {
         ArbolAVL habitaciones = new ArbolAVL();
         GrafoEtiquetado grafoCasa = new GrafoEtiquetado();
         HashMap<String, Equipo> equipos = new HashMap<>();
-        HashMap<String, Lista> desafiosPorEquipo = new HashMap<>(); //TODO: Ver si esta bien el 1 a muchos.
+        HashMap<String, Lista> desafiosPorEquipo = new HashMap<>();
 
         FileManager.inicioEjecucion();
 
@@ -36,7 +36,7 @@ public class EscapeHouse {
                 case '0':
                     // Carga inicial del sistema
                     FileManager.estadoInicial();
-                    FileManager.cargarDatos(desafios, equipos, grafoCasa, habitaciones); // TODO: que pasa con los desafios hechos hasta el momento? se pierden?
+                    FileManager.cargarDatos(desafios, equipos, grafoCasa, habitaciones);
                     break;
                 case '1':
                     // ABM de Habitaciones, Desafios y Equipos
@@ -84,7 +84,6 @@ public class EscapeHouse {
      * @param desafiosPorEquipo HashMap de Desafios por Equipo
      */
     public static void abm(Scanner sc, GrafoEtiquetado grafoCasa, ArbolAVL habitaciones, ArbolAVL desafios, HashMap<String, Equipo> equipos, HashMap<String, Lista> desafiosPorEquipo) {
-        // TODO: Ver si la modificacion funciona, agregar Texto en las altas, bajas y modificaciones. Si ya existe, pedir hasta que no exista en la modificacion y alta.
         char opcion = '0';
         while (opcion != '9') {
             Texto.abm();
@@ -259,7 +258,7 @@ public class EscapeHouse {
      * @param sc        Scanner
      * @param grafoCasa Grafo de Habitaciones
      */
-    public static void altaPuerta(Scanner sc, GrafoEtiquetado grafoCasa) { //TODO: No puede haber una puerta con el mismo puntaje que otra?
+    public static void altaPuerta(Scanner sc, GrafoEtiquetado grafoCasa) {
         System.out.println("Ingrese el numero de habitacion 1: ");
         int nroHabitacion1 = sc.nextInt();
 
@@ -301,7 +300,6 @@ public class EscapeHouse {
      * @param grafoCasa Grafo de Habitaciones
      */
     public static void modificacionPuerta(Scanner sc, GrafoEtiquetado grafoCasa) {
-        // TODO: Ver si es necesario este metodo
         System.out.println("Ingrese el numero de habitacion 1: ");
         int nroHabitacion1 = sc.nextInt();
 
@@ -474,7 +472,7 @@ public class EscapeHouse {
         System.out.println("Ingrese el nombre del equipo: ");
         String nombreEquipo = sc.next();
 
-        Equipo equipo = equipos.get(nombreEquipo); // TODO: Ver problema con referencia al objeto.???
+        Equipo equipo = equipos.get(nombreEquipo);
 
         if (equipo != null) {
             System.out.println("Ingrese el nuevo puntaje exigido del equipo para salir: ");
@@ -532,7 +530,7 @@ public class EscapeHouse {
                     break;
                 case '3':
                     // Maximo Puntaje
-                    maximoPuntaje(sc,grafoCasa); // TODO: Implementar maximoPuntaje
+                    maximoPuntaje(sc,grafoCasa);
                     break;
                 case '4':
                     // Sin Pasar Por
@@ -613,7 +611,7 @@ public class EscapeHouse {
      * Dados dos codigos de habitacion, mostrar el maximo puntaje que deberian acumular para ir de hab1 a hab2.
      */
     public static void maximoPuntaje(Scanner sc, GrafoEtiquetado grafoCasa) {
-        System.out.println("Ingrese el codigo de la primera habitacion:"); // TODO: Ver si esta bien
+        System.out.println("Ingrese el codigo de la primera habitacion:");
         int nroHabitacion1 = sc.nextInt();
         System.out.println("Ingrese el codigo de la segunda habitacion:");
         int nroHabitacion2 = sc.nextInt();
@@ -623,7 +621,7 @@ public class EscapeHouse {
             int puntajeMaximo = grafoCasa.maxPuntaje(nroHabitacion1, nroHabitacion2);
             System.out.println("El maximo puntaje que deberian acumular para ir de la habitacion " + nroHabitacion1 + " a la habitacion " + nroHabitacion2 + " es " + puntajeMaximo + ".");
         } else {
-            System.out.println("es la misma habitacion"); // TODO: Terminar
+            System.out.println("es la misma habitacion");
         }
     }
 
@@ -742,7 +740,7 @@ public class EscapeHouse {
      * @param desafiosPorEquipo HashMap de desafios por equipo
      */
     public static void verificarDesafioResuelto(Scanner sc, HashMap<String, Lista> desafiosPorEquipo, HashMap<String, Equipo> equipos, ArbolAVL desafios) {
-        boolean resuelto = false; // TODO: Tener en cuenta que el desafio puede no existir, si no, lo tomará como no resuelto
+        boolean resuelto = false;
         int i = 1;
         System.out.println("Ingrese el nombre del equipo: ");
         String nombreEquipo = sc.next();
@@ -826,7 +824,7 @@ public class EscapeHouse {
                     break;
                 case '1':
                     // Posibles Desafios
-                    posiblesDesafios(sc,grafoCasa,equipos,desafiosPorEquipo,desafios); // TODO: Implementar
+                    posiblesDesafios(sc,grafoCasa,equipos,desafiosPorEquipo,desafios);
                     break;
                 case '2':
                     // Jugar Desafio
